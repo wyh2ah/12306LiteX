@@ -2,8 +2,6 @@
 
 <h2><center>12306LiteX: A Simplified China's 12306 train ticket booking platform</center></h2>
 
-[TOC]
-
 # Team Members
 
 - Yuheng Wu, `NetID`: yw5372
@@ -50,4 +48,4 @@ Test
 
 # Notes
 
-Since using the whole Chinese map as the real case is too complicated, we may use a major station list among Shanghai, Nanjin and Zhejiang metropolitan Area.
+Since using the whole Chinese map as the real case is too complicated, we may use a major station list among Shanghai, Nanjin and Hangzhou metropolitan Area.
