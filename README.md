@@ -42,9 +42,19 @@
 
 ## AI (with OpenAI APIs) Interface
 
-**TODO:XINGYU**
+We aim to develop an AI-based assistant within the app that can guide users efficiently, inspired by the customer support model in apps like Bank of America.
 
-Test
+- User Interaction Panel: Users can click on a chat interface and type in their requests or questions. This could range from asking how to book a ticket to changing their password.
+
+- Natural Language Processing: The AI assistant interprets the user's input by processing it through an AI API, transforming the user's request into actionable commands for the app.
+
+- Detailed Guidance: The assistant will provide step-by-step instructions to guide users through the requested processes.
+
+- Direct Navigation Links: After generating guidance, the AI assistant will offer a direct link within the chat interface. When clicked, this link will take users directly to the relevant feature page or function within the app.
+
+- Feature Availability Feedback: If a requested feature is not yet supported in the app, the AI assistant will inform the user clearly.
+
+- Contextual Replies for Off-Topic Queries: If the user’s input is unrelated to app services, the AI assistant will respond with a polite message to tell the user.
 
 # Notes
 
