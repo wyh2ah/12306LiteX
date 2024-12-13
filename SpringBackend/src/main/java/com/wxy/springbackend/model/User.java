@@ -10,11 +10,6 @@ public class User {
     private String mname;
     private String lname;
     private LocalDateTime birthDate;
-    private String addressCountry;
-    private String addressState;
-    private String addressCity;
-    private String addressStreet1;
-    private String addressStreet2;
     private String gender;
     private String nationality;
     private String email;
@@ -23,10 +18,18 @@ public class User {
     public User() {
     }
 
-    public User(Integer id, String username, String password) {
+    public User(Integer id, String username, String password, String fname, String mname, String lname, LocalDateTime birthDate, String gender, String nationality, String email, String phone) {
         this.id = id;
         this.username = username;
         this.password = password;
+        this.fname = fname;
+        this.mname = mname;
+        this.lname = lname;
+        this.birthDate = birthDate;
+        this.gender = gender;
+        this.nationality = nationality;
+        this.email = email;
+        this.phone = phone;
     }
 
     public Integer getId() {
@@ -85,46 +88,6 @@ public class User {
         this.birthDate = birthDate;
     }
 
-    public String getAddressCountry() {
-        return addressCountry;
-    }
-
-    public void setAddressCountry(String addressCountry) {
-        this.addressCountry = addressCountry;
-    }
-
-    public String getAddressState() {
-        return addressState;
-    }
-
-    public void setAddressState(String addressState) {
-        this.addressState = addressState;
-    }
-
-    public String getAddressCity() {
-        return addressCity;
-    }
-
-    public void setAddressCity(String addressCity) {
-        this.addressCity = addressCity;
-    }
-
-    public String getAddressStreet1() {
-        return addressStreet1;
-    }
-
-    public void setAddressStreet1(String addressStreet1) {
-        this.addressStreet1 = addressStreet1;
-    }
-
-    public String getAddressStreet2() {
-        return addressStreet2;
-    }
-
-    public void setAddressStreet2(String addressStreet2) {
-        this.addressStreet2 = addressStreet2;
-    }
-
     public String getGender() {
         return gender;
     }
@@ -167,11 +130,6 @@ public class User {
                 ", mname='" + mname + '\'' +
                 ", lname='" + lname + '\'' +
                 ", birthDate=" + birthDate +
-                ", addressCountry='" + addressCountry + '\'' +
-                ", addressState='" + addressState + '\'' +
-                ", addressCity='" + addressCity + '\'' +
-                ", addressStreet1='" + addressStreet1 + '\'' +
-                ", addressStreet2='" + addressStreet2 + '\'' +
                 ", gender='" + gender + '\'' +
                 ", nationality='" + nationality + '\'' +
                 ", email='" + email + '\'' +
