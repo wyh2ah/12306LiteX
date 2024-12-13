@@ -95,4 +95,36 @@
     }
     ```
     
+  
+  **获得用户信息**
+  
+  - 方法：`POST`
+  
+  - URL：`/api/user/change_information`
+  
+  - 描述：修改除密码外所有用户信息
+  
+  - 输入：
+  
+    userid
+  
+    
+  
+  - 返回值：
+  
+    ```json
+    {
+        "id": 1,
+        "username": "alan",
+        "password": "1234",
+        "fname": "James",
+        "lname": "Bond",
+        "birthDate": "2024-12-05T10:00:00",
+        "gender": "male",
+        "nationality": "American",
+        "email": "james.bond@example.com",
+        "phone": "+1-234-567-890"
+    }
+    ```
+  
     
