@@ -5,10 +5,7 @@ import com.wxy.springbackend.repository.UserRepository;
 import com.wxy.springbackend.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -51,6 +48,12 @@ public class UserController {
     public String changePassword(@RequestParam Integer userid, @RequestParam String oldPassword, @RequestParam String newPassword) {
         boolean success = userService.resetPassword(userid, oldPassword, newPassword);
         return success ? "Reset Password Success" : "Reset Fail, Incorrect Old Password";
+    }
+
+    @PostMapping("/user/change_information")
+    public User changeInformation(@RequestBody User user) {
+        System.out.println(user);
+        return userService.changeInformation(user);
     }
 
 }

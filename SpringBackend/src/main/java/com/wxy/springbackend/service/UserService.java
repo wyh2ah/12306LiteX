@@ -41,5 +41,10 @@ public class UserService {
         return isSuccess != 0;
     }
 
+    public User changeInformation(User user){
+        return userRepository.changeInformation(user);
+    }
+
+
 
 }

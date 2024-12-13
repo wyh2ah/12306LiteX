@@ -7,7 +7,6 @@ public class User {
     private String username;
     private String password;
     private String fname;
-    private String mname;
     private String lname;
     private LocalDateTime birthDate;
     private String gender;
@@ -18,12 +17,11 @@ public class User {
     public User() {
     }
 
-    public User(Integer id, String username, String password, String fname, String mname, String lname, LocalDateTime birthDate, String gender, String nationality, String email, String phone) {
+    public User(Integer id, String username, String password, String fname, String lname, LocalDateTime birthDate, String gender, String nationality, String email, String phone) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.fname = fname;
-        this.mname = mname;
         this.lname = lname;
         this.birthDate = birthDate;
         this.gender = gender;
@@ -64,13 +62,6 @@ public class User {
         this.fname = fname;
     }
 
-    public String getMname() {
-        return mname;
-    }
-
-    public void setMname(String mname) {
-        this.mname = mname;
-    }
 
     public String getLname() {
         return lname;
@@ -127,7 +118,6 @@ public class User {
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", fname='" + fname + '\'' +
-                ", mname='" + mname + '\'' +
                 ", lname='" + lname + '\'' +
                 ", birthDate=" + birthDate +
                 ", gender='" + gender + '\'' +

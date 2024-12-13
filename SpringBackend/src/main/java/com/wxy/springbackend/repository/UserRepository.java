@@ -52,4 +52,25 @@ public class UserRepository {
         return jdbcTemplate.update(sql, password, userid);
     }
 
+    public User changeInformation(User user){
+        String sql = "UPDATE wxy_user SET user_name = ?, fname = ?, lname = ?, birth_date = ?, gender = ?," +
+                "   nationality = ?, email = ?, phone = ? WHERE user_id = ?";
+        int rowsAffected = jdbcTemplate.update(sql,
+                user.getUsername(),
+                user.getFname(),
+                user.getLname(),
+                user.getBirthDate(),
+                user.getGender(),
+                user.getNationality(),
+                user.getEmail(),
+                user.getPhone(),
+                user.getId()
+        );
+        if(rowsAffected > 0){
+            return user;
+        }else{
+            throw new RuntimeException("Failed to update user information. User ID: " + user.getId());
+        }
+    }
+
 }
