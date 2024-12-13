@@ -1,0 +1,91 @@
+@font-face {
+    font-family: 'Libre Baskerville';
+    src: url('fonts/LibreBaskerville-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'Manrope';
+    src: url('fonts/Manrope.ttf');
+}
+
+.root {
+    -fx-background-color: #f5f7fa;
+    -fx-font-family: "Arial", sans-serif;
+}
+
+.headbar {
+    -fx-background-color: #f5f7fa;
+    -fx-padding: 10;
+    -fx-spacing: 10;
+    -fx-alignment: center-left;
+}
+
+.headbar-title {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333;
+}
+
+.login-panel, .register-panel {
+    -fx-padding: 20;
+    -fx-border-color: #dddddd;
+    -fx-border-width: 1;
+    -fx-border-radius: 5;
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 5;
+    -fx-max-width: 400;
+    -fx-max-height: 370;
+    -fx-spacing: 15;
+}
+
+.panel-title {
+    -fx-font-family: 'Libre Baskerville';
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333;
+}
+
+.login-input-field {
+    -fx-font-family: 'Manrope';
+    -fx-prompt-text-fill: #888;
+    -fx-border-color: #cccccc;
+    -fx-border-radius: 5;
+    -fx-padding: 10;
+    -fx-background-radius: 5;
+
+    -fx-max-width: 300;
+    -fx-max-height: 30;
+}
+
+.login-input-field:focused {
+    -fx-border-color: #000000;
+}
+
+.action-button {
+    -fx-font-family: 'Manrope';
+    -fx-background-color: #000000;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-padding: 10;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+
+    -fx-pref-width: 300;
+    -fx-pref-height: 30;
+}
+
+.action-button:hover {
+    -fx-background-color: #717171;
+}
+
+.hyperlink {
+    -fx-font-family: 'Libre Baskerville';
+    -fx-text-fill: #000000;
+}
+
+.warn-text {
+    -fx-font-family: 'Libre Baskerville';
+    -fx-font-size: 12px;
+    -fx-text-fill: #ff0000;
+}
