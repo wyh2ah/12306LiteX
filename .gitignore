@@ -31,3 +31,6 @@ build/
 
 ### VS Code ###
 .vscode/
+
+SpringBackend/src/main/resources/application.properties
+.DS_Store
