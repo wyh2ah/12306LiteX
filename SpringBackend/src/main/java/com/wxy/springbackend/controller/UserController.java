@@ -34,6 +34,7 @@ public class UserController {
     public ResponseEntity<Map<String, Object>> login(@RequestParam String username, @RequestParam String password) {
         boolean success = userService.login(username, password);
         Map<String, Object> response = new HashMap<>();
+
         if(success){
             User user = userRepository.findByUsername(username);
             response.put("status", "success");

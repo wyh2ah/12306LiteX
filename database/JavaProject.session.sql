@@ -1,4 +1,4 @@
--- drop database javaproject;
--- create database javaproject;
--- use javaproject;
+drop database javaproject;
+create database javaproject;
+use javaproject;
 show tables;

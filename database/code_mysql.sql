@@ -52,19 +52,19 @@ ALTER TABLE wxy_trip_station
     ADD CHECK ( station_type IN ( 'END', 'START', 'STOP' ) );
 
 CREATE TABLE wxy_user (
-    user_id     INT NOT NULL,
-    user_name   VARCHAR(50) NOT NULL,
+    user_id     INT AUTO_INCREMENT PRIMARY KEY,
+    user_name   VARCHAR(50) ,
     password    VARCHAR(50) NOT NULL,
-    fname       VARCHAR(50) NOT NULL,
-    lname       VARCHAR(50) NOT NULL,
-    birth_date  DATETIME NOT NULL,
-    gender      VARCHAR(50) NOT NULL,
-    nationality VARCHAR(50) NOT NULL,
-    email       VARCHAR(50) NOT NULL,
-    phone       VARCHAR(50) NOT NULL
+    fname       VARCHAR(50) ,
+    lname       VARCHAR(50) ,
+    birth_date  DATETIME ,
+    gender      VARCHAR(50) ,
+    nationality VARCHAR(50) ,
+    email       VARCHAR(50) ,
+    phone       VARCHAR(50) 
 );
 
-ALTER TABLE wxy_user ADD CONSTRAINT wxy_user_pk PRIMARY KEY ( user_id );
+-- ALTER TABLE wxy_user ADD CONSTRAINT wxy_user_pk PRIMARY KEY ( user_id );
 
 CREATE TABLE wxy_user_trip (
     user_id  INT NOT NULL,
