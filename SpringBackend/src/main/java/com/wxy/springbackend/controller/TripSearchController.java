@@ -25,5 +25,12 @@ public class TripSearchController {
         return new ResponseEntity<>(trips, HttpStatus.OK);
     }
 
-//    @GetMapping("/api")
+    @GetMapping("/api")
+    public ResponseEntity<List<TripSearch>> ShowTrip(@RequestParam String pathid,
+                                                     @RequestParam String depart_station,
+                                                     @RequestParam String arrival_station,
+                                                     @RequestParam String datetime){
+
+
+    }
 }

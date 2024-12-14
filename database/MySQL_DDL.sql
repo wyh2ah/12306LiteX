@@ -30,8 +30,9 @@ CREATE TABLE wxy_path_station (
     station_type      VARCHAR(50) NOT NULL,
     station_id        INT NOT NULL,
     start_time        DATETIME NOT NULL,
-    a_seats_avialable INT NOT NULL,
-    b_seats_avialable INT NOT NULL,
+    a_seats_available INT NOT NULL,
+    b_seats_available INT NOT NULL,
+    c_seats_available INT NOT NULL,
     path_id           INT NOT NULL
 );
 
@@ -60,7 +61,8 @@ CREATE TABLE wxy_train (
     train_id    INT AUTO_INCREMENT PRIMARY KEY,
     train_name  VARCHAR(50) NOT NULL,
     a_seats_num INT NOT NULL,
-    b_seats_num INT NOT NULL
+    b_seats_num INT NOT NULL,
+    c_seats_num INT NOT NULL
 );
 
 -- ALTER TABLE wxy_train ADD CONSTRAINT wxy_train_pk PRIMARY KEY ( train_id );
