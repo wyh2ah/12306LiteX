@@ -39,8 +39,7 @@ SELECT
     s.station_name,
     ps.start_time,
     ps.a_seats_avialable,
-    ps.b_seats_avialable,
-    ps.c_seats_avialable
+    ps.b_seats_avialable
 FROM
     wxy_path_station ps
 JOIN
