@@ -232,7 +232,7 @@
 
 - 输入：
 
-  pathID, departureStationName, arrivalStationName, departureTime, arrivalTime
+  pathID, departureStationName, arrivalStationName, departureTime, seatLevel
 
   Example: 
 
@@ -240,10 +240,8 @@
   1, New York, Orlando, 2024-12-23 11:00:00, 2024-12-23 17:00:00
   ```
 
-  ```
   
-  ```
-
+  
   
 
 - 返回值：isSuccess
