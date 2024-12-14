@@ -170,9 +170,8 @@
           "prices_C": 1029.7,
           "departStationId": "Pittsburgh",
           "arrivalStationId": "Ann Arbor",
-          "aSeatsLeft": 10,
-          "bSeatsLeft": 20,
-          "cSeatsLeft": 70
+          "aSeatsLeft": 5,
+          "bSeatsLeft": 70
       },
       {
           "pathId": 5,
@@ -189,9 +188,8 @@
           "prices_C": 1029.7,
           "departStationId": "Pittsburgh",
           "arrivalStationId": "Ann Arbor",
-          "aSeatsLeft": 10,
-          "bSeatsLeft": 20,
-          "cSeatsLeft": 70
+          "aSeatsLeft": 5,
+          "bSeatsLeft": 70
       }
   ]
   ```
@@ -219,8 +217,7 @@
           "prices_C": 2574.25,
           "departStationId": "Boston",
           "arrivalStationId": "Orlando",
-          "aSeatsLeft": 10,
-          "bSeatsLeft": 20,
+          "aSeatsLeft": 5,
           "cSeatsLeft": 70
       }
   ]

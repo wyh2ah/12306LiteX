@@ -8,7 +8,6 @@ public class TripSearch {
     private List<String> arrivalTimeList; // 到达时间列表
     private double prices_A; // 票价
     private double prices_B; // 票价
-    private double prices_C; // 票价
     private String departStationId; // 始发站 ID
     private String arrivalStationId; // 到达站 ID
     private int aSeatsLeft; // A 类座位剩余数量
@@ -59,14 +58,6 @@ public class TripSearch {
         this.prices_B = prices_B;
     }
 
-    public double getPrices_C() {
-        return prices_C;
-    }
-
-    public void setPrices_C(double prices_C) {
-        this.prices_C = prices_C;
-    }
-
     public String getDepartStationId() {
         return departStationId;
     }
@@ -115,7 +106,6 @@ public class TripSearch {
                 ", arrivalTimeList=" + arrivalTimeList +
                 ", prices_A=" + prices_A +
                 ", prices_B=" + prices_B +
-                ", prices_C=" + prices_C +
                 ", departStationId='" + departStationId + '\'' +
                 ", arrivalStationId='" + arrivalStationId + '\'' +
                 ", aSeatsLeft=" + aSeatsLeft +

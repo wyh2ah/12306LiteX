@@ -18,13 +18,30 @@ INSERT INTO wxy_station (station_id, station_name) VALUES
     (15, "New Orleans");
 
 
+INSERT INTO WXY_TRAIN (TRAIN_ID, TRAIN_NAME, A_SEATS_NUM, B_SEATS_NUM) VALUES
+    (1, 'Sunrise Express', 5, 70),
+    (2, 'Midnight Express', 5, 70),
+    (3, 'Blue Arrow', 5, 70),
+    (4, 'Golden Line', 5, 70),
+    (5, 'Silver Horizon', 5, 70),
+    (6, 'Thunderbird', 5, 70),
+    (7, 'Morning Star', 5, 70),
+    (8, 'Night Owl', 5, 70),
+    (9, 'Crystal Stream', 5, 70),
+    (10, 'Emerald Voyage', 5, 70);
 
-INSERT INTO WXY_PATH (PATH_ID) VALUES 
-    (1), (2), 
-    (3), (4), 
-    (5), (6), 
-    (7), (8), 
-    (9), (10);
+INSERT INTO WXY_PATH (PATH_ID, TRAIN_ID) VALUES
+(1, 1),
+(2, 2),
+(3, 3),
+(4, 4),
+(5, 5),
+(6, 6),
+(7, 7),
+(8, 8),
+(9, 9),
+(10, 10);
+
 
 -- Dec.23 -Dec.29 
 INSERT INTO wxy_path_station (path_id, station_id, station_type, start_time, a_seats_avialable, b_seats_avialable) VALUES
