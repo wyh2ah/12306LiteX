@@ -1,9 +1,16 @@
 -- SQLINES FOR EVALUATION USE ONLY (14 DAYS)
 CREATE TABLE wxy_invoice (
     invoice_id    INT AUTO_INCREMENT PRIMARY KEY,
-    invoice_state CHAR(1) NOT NULL,
+    payment_state VARCHAR(50) NOT NULL,
+    valid_state VARCHAR(50) NOT NULL,
     ticket_id     INT NOT NULL
 );
+
+ALTER TABLE wxy_invoice
+    ADD CHECK ( payment_state IN ( 'TRUE', 'FALSE' ) );
+
+ALTER TABLE wxy_invoice
+    ADD CHECK ( valid_state IN ( 'NULL','VALID', 'REFUND', 'RESCHEDULE' ) );
 
 CREATE UNIQUE INDEX wxy_invoice__idx ON
     wxy_invoice (
@@ -24,8 +31,7 @@ CREATE TABLE wxy_path_station (
     station_id        INT NOT NULL,
     start_time        DATETIME NOT NULL,
     a_seats_avialable INT NOT NULL,
-    b_seats_avialable INT NOT NULL,
-    c_seats_avialable INT NOT NULL
+    b_seats_avialable INT NOT NULL
 );
 
 ALTER TABLE wxy_path_station
@@ -53,8 +59,7 @@ CREATE TABLE wxy_train (
     train_id    INT AUTO_INCREMENT PRIMARY KEY,
     train_name  VARCHAR(50) NOT NULL,
     a_seats_num INT NOT NULL,
-    b_seats_num INT NOT NULL,
-    c_seats_num INT NOT NULL
+    b_seats_num INT NOT NULL
 );
 
 -- ALTER TABLE wxy_train ADD CONSTRAINT wxy_train_pk PRIMARY KEY ( train_id );
