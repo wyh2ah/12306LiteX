@@ -303,15 +303,33 @@
   pathid, depart_station, arrival_station, datetime
 
   ```
-  Pittsburgh, Ann Arbor, 2024-12-23
+  13, Pittsburgh, Ann Arbor, 2024-12-23
   ```
 
 - 输出：
 
+  ```json
+  {
+      "pathId": 13,
+      "stations": [
+          "Pittsburgh",
+          "Ann Arbor"
+      ],
+      "arrivalTimeList": [
+          "2024-12-23 17:00:00",
+          "2024-12-23 20:00:00"
+      ],
+      "prices_A": 0.0,
+      "prices_B": 0.0,
+      "prices_C": 0.0,
+      "departStationId": "Pittsburgh",
+      "arrivalStationId": "Ann Arbor",
+      "aSeatsLeft": 5,
+      "bSeatsLeft": 20,
+      "cSeatsLeft": 70
+  }
   ```
-  Boston, Orlando, 2024-12-23
-  ```
-
+  
   
 
 
