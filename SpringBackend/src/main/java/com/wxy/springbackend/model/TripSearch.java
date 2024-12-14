@@ -8,14 +8,31 @@ public class TripSearch {
     private List<String> arrivalTimeList; // 到达时间列表
     private double prices_A; // 票价
     private double prices_B; // 票价
+    private double prices_C;
     private String departStationId; // 始发站 ID
     private String arrivalStationId; // 到达站 ID
     private int aSeatsLeft; // A 类座位剩余数量
     private int bSeatsLeft; // B
+    private int cSeatsLeft;
 
     public TripSearch() {
     }
 
+    public double getPrices_C() {
+        return prices_C;
+    }
+
+    public void setPrices_C(double prices_C) {
+        this.prices_C = prices_C;
+    }
+
+    public int getcSeatsLeft() {
+        return cSeatsLeft;
+    }
+
+    public void setcSeatsLeft(int cSeatsLeft) {
+        this.cSeatsLeft = cSeatsLeft;
+    }
 
     public int getPathId() {
         return pathId;
@@ -98,10 +115,12 @@ public class TripSearch {
                 ", arrivalTimeList=" + arrivalTimeList +
                 ", prices_A=" + prices_A +
                 ", prices_B=" + prices_B +
+                ", prices_C=" + prices_C +
                 ", departStationId='" + departStationId + '\'' +
                 ", arrivalStationId='" + arrivalStationId + '\'' +
                 ", aSeatsLeft=" + aSeatsLeft +
                 ", bSeatsLeft=" + bSeatsLeft +
+                ", cSeatsLeft=" + cSeatsLeft +
                 '}';
     }
 }

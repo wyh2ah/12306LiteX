@@ -167,10 +167,12 @@
           ],
           "prices_A": 946.52,
           "prices_B": 451.42,
+          "prices_C": 301.08,
           "departStationId": "Pittsburgh",
           "arrivalStationId": "Ann Arbor",
           "aSeatsLeft": 5,
-          "bSeatsLeft": 70
+          "bSeatsLeft": 20,
+          "cSeatsLeft": 70
       },
       {
           "pathId": 5,
@@ -184,15 +186,55 @@
           ],
           "prices_A": 946.52,
           "prices_B": 451.42,
+          "prices_C": 301.08,
           "departStationId": "Pittsburgh",
           "arrivalStationId": "Ann Arbor",
           "aSeatsLeft": 5,
-          "bSeatsLeft": 70
+          "bSeatsLeft": 20,
+          "cSeatsLeft": 70
+      },
+      {
+          "pathId": 13,
+          "stations": [
+              "Pittsburgh",
+              "Ann Arbor"
+          ],
+          "arrivalTimeList": [
+              "2024-12-23 17:00:00",
+              "2024-12-23 20:00:00"
+          ],
+          "prices_A": 946.52,
+          "prices_B": 451.42,
+          "prices_C": 301.08,
+          "departStationId": "Pittsburgh",
+          "arrivalStationId": "Ann Arbor",
+          "aSeatsLeft": 5,
+          "bSeatsLeft": 20,
+          "cSeatsLeft": 70
+      },
+      {
+          "pathId": 15,
+          "stations": [
+              "Pittsburgh",
+              "Ann Arbor"
+          ],
+          "arrivalTimeList": [
+              "2024-12-23 19:00:00",
+              "2024-12-23 21:00:00"
+          ],
+          "prices_A": 946.52,
+          "prices_B": 451.42,
+          "prices_C": 301.08,
+          "departStationId": "Pittsburgh",
+          "arrivalStationId": "Ann Arbor",
+          "aSeatsLeft": 5,
+          "bSeatsLeft": 20,
+          "cSeatsLeft": 70
       }
   ]
   ```
   
-  ```
+  ```Json
   [
       {
           "pathId": 1,
@@ -212,15 +254,67 @@
           ],
           "prices_A": 2366.3,
           "prices_B": 1128.55,
+          "prices_C": 752.6999999999999,
           "departStationId": "Boston",
           "arrivalStationId": "Orlando",
           "aSeatsLeft": 5,
-          "bSeatsLeft": 70
+          "bSeatsLeft": 20,
+          "cSeatsLeft": 70
+      },
+      {
+          "pathId": 11,
+          "stations": [
+              "Boston",
+              "New York",
+              "Baltimore",
+              "Richmond",
+              "Orlando"
+          ],
+          "arrivalTimeList": [
+              "2024-12-23 13:00:00",
+              "2024-12-23 15:00:00",
+              "2024-12-23 17:00:00",
+              "2024-12-23 19:00:00",
+              "2024-12-23 21:00:00"
+          ],
+          "prices_A": 2366.3,
+          "prices_B": 1128.55,
+          "prices_C": 752.6999999999999,
+          "departStationId": "Boston",
+          "arrivalStationId": "Orlando",
+          "aSeatsLeft": 5,
+          "bSeatsLeft": 20,
+          "cSeatsLeft": 70
       }
   ]
   ```
   
+
+**显示形成信息**
+
+- 方法：`GET`
+
+- URL：`/api/user/search/trip`
+
+- 描述：输入出发站，到达站，日期，pathid，查询对应形成
+
+- 输入：
+
+  pathid, depart_station, arrival_station, datetime
+
+  ```
+  Pittsburgh, Ann Arbor, 2024-12-23
+  ```
+
+- 输出：
+
+  ```
+  Boston, Orlando, 2024-12-23
+  ```
+
   
+
+
 
 **订票**
 

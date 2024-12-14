@@ -24,4 +24,6 @@ public class TripSearchController {
         List<TripSearch> trips = tripSearchService.getAllTrip(depart_station, arrival_station, datetime);
         return new ResponseEntity<>(trips, HttpStatus.OK);
     }
+
+//    @GetMapping("/api")
 }

@@ -12,6 +12,7 @@ public class TripSearchService {
     private final TripSearchRepository tripSearchRepository;
     private final double UNIT_PRICE_A = 473.26;
     private final double UNIT_PRICE_B = 225.71;
+    private final double UNIT_PRICE_C = 150.54;
 
     public TripSearchService(TripSearchRepository tripSearchRepository){
         this.tripSearchRepository = tripSearchRepository;
@@ -33,6 +34,7 @@ public class TripSearchService {
                     count++;
                     t.setPrices_A(count * UNIT_PRICE_A);
                     t.setPrices_B(count * UNIT_PRICE_B);
+                    t.setPrices_C(count * UNIT_PRICE_C);
                     break;
                 }else if(spot){count++;}
             }
