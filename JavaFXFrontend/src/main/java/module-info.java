@@ -11,6 +11,7 @@ module com.wxy.javafxfrontend {
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
     requires java.net.http;
+    requires com.fasterxml.jackson.datatype.jsr310;
 
     opens com.wxy.javafxfrontend to javafx.fxml;
     exports com.wxy.javafxfrontend;

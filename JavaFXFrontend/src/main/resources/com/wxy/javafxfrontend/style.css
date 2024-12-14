@@ -25,7 +25,6 @@
     -fx-font-size: 32px;
     -fx-font-weight: bold;
     -fx-text-fill: #2e5397;
-    -fx-translate-y: 7;
 }
 
 .login-panel, .register-panel {
@@ -133,7 +132,7 @@
 }
 
 .sidebar-button:pressed {
-    -fx-background-color: #1abc9c;
+    -fx-background-color: #34495e;
     -fx-text-fill: #ffffff;
 }
 
@@ -186,7 +185,6 @@
     -fx-border-color: #000000;
 }
 
-/* 交换按钮 */
 .swap-button {
     -fx-font-family: 'Manrope';
     -fx-background-color: #2c3e50;
@@ -222,5 +220,69 @@
 .search-button:hover {
     -fx-background-color: #717171;
 }
+
+.content-panel {
+    -fx-background-color: #ffffff;
+    -fx-padding: 30;
+    -fx-spacing: 20;
+    -fx-border-color: #ffffff;
+    -fx-border-width: 1;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+}
+
+
+.black-button {
+    -fx-font-family: 'Manrope';
+    -fx-background-color: #000000;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-padding: 8 14;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-max-width: 100;
+    -fx-alignment: CENTER;
+    -fx-max-height: 30;
+}
+
+.black-button:hover {
+    -fx-background-color: #717171;
+}
+
+.warn-text {
+    -fx-font-family: 'Libre Baskerville';
+    -fx-font-size: 12px;
+    -fx-text-fill: #ff0000;
+}
+
+.back-button {
+    -fx-font-family: 'Libre Baskerville';
+    -fx-background-color: #34495e;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 17px;
+    -fx-font-weight: bold;
+    -fx-padding: 8 14;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-min-width: 50;
+    -fx-alignment: CENTER;
+    -fx-max-height: 30;
+}
+
+.black-button:hover {
+    -fx-background-color: #717171;
+}
+
+ScrollPane {
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+}
+
+ScrollPane .viewport {
+    -fx-background-color: transparent;
+}
+
+
 
 

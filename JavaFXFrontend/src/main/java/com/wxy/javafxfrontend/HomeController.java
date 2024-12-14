@@ -71,4 +71,16 @@ public class HomeController {
         stage.setScene(scene);
         stage.show();
     }
+
+    @FXML
+    private void accountClick(ActionEvent event) throws IOException, InterruptedException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("account.fxml"));
+        Scene scene = new Scene(loader.load(), 1920, 1080);
+        AccountController controller = loader.getController();
+        controller.setParameters(this.userId, this.username);
+
+        Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
+    }
 }
