@@ -1,6 +1,6 @@
 -- SQLINES FOR EVALUATION USE ONLY (14 DAYS)
 CREATE TABLE wxy_invoice (
-    invoice_id    INT NOT NULL,
+    invoice_id    INT AUTO_INCREMENT PRIMARY KEY,
     invoice_state CHAR(1) NOT NULL,
     trip_order_id INT NOT NULL
 );
@@ -10,22 +10,22 @@ CREATE UNIQUE INDEX wxy_invoice__idx ON
         trip_order_id
     ASC );
 
-ALTER TABLE wxy_invoice ADD CONSTRAINT wxy_invoice_pk PRIMARY KEY ( invoice_id );
+-- ALTER TABLE wxy_invoice ADD CONSTRAINT wxy_invoice_pk PRIMARY KEY ( invoice_id );
 
 CREATE TABLE wxy_station (
-    station_id   INT NOT NULL,
+    station_id   INT AUTO_INCREMENT PRIMARY KEY,
     station_name VARCHAR(50) NOT NULL
 );
 
-ALTER TABLE wxy_station ADD CONSTRAINT wxy_station_pk PRIMARY KEY ( station_id );
+-- ALTER TABLE wxy_station ADD CONSTRAINT wxy_station_pk PRIMARY KEY ( station_id );
 
 CREATE TABLE wxy_train (
-    train_id   INT NOT NULL,
+    train_id   INT AUTO_INCREMENT PRIMARY KEY,
     train_name VARCHAR(50) NOT NULL,
     seats_num  INT
 );
 
-ALTER TABLE wxy_train ADD CONSTRAINT wxy_train_pk PRIMARY KEY ( train_id );
+-- ALTER TABLE wxy_train ADD CONSTRAINT wxy_train_pk PRIMARY KEY ( train_id );
 
 CREATE TABLE wxy_train_trip (
     seats_left INT NOT NULL,
@@ -34,11 +34,11 @@ CREATE TABLE wxy_train_trip (
 );
 
 CREATE TABLE wxy_trip (
-    trip_id   INT NOT NULL,
+    trip_id   INT AUTO_INCREMENT PRIMARY KEY,
     trip_date DATETIME NOT NULL
 );
 
-ALTER TABLE wxy_trip ADD CONSTRAINT wxy_trip_pk PRIMARY KEY ( trip_id );
+-- ALTER TABLE wxy_trip ADD CONSTRAINT wxy_trip_pk PRIMARY KEY ( trip_id );
 
 CREATE TABLE wxy_trip_station (
     station_type VARCHAR(50) NOT NULL,

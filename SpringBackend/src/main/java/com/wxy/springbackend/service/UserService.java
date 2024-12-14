@@ -41,5 +41,13 @@ public class UserService {
         return isSuccess != 0;
     }
 
+    public User changeInformation(User user){
+        return userRepository.changeInformation(user);
+    }
+
+    public User getUserInfoById(Integer userid){
+        return userRepository.getUserInfoByUserID(userid);
+    }
+
 
 }

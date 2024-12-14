@@ -52,4 +52,47 @@ public class UserRepository {
         return jdbcTemplate.update(sql, password, userid);
     }
 
+    public User changeInformation(User user){
+        String sql = "UPDATE wxy_user SET user_name = ?, fname = ?, lname = ?, birth_date = ?, gender = ?," +
+                "   nationality = ?, email = ?, phone = ? WHERE user_id = ?";
+        int rowsAffected = jdbcTemplate.update(sql,
+                user.getUsername(),
+                user.getFname(),
+                user.getLname(),
+                user.getBirthDate(),
+                user.getGender(),
+                user.getNationality(),
+                user.getEmail(),
+                user.getPhone(),
+                user.getId()
+        );
+        if(rowsAffected > 0){
+            return user;
+        }else{
+            throw new RuntimeException("Failed to update user information. User ID: " + user.getId());
+        }
+    }
+
+    private final RowMapper<User> userInfoRowMapper = (rs, rowNum) -> {
+        User user = new User();
+        user.setId(rs.getInt("user_id"));
+        user.setUsername(rs.getString("user_name"));
+        user.setPassword(rs.getString("password"));
+        user.setFname(rs.getString("fname"));
+        user.setLname(rs.getString("lname"));
+        user.setBirthDate(rs.getTimestamp("birth_date").toLocalDateTime());
+        user.setGender(rs.getString("gender"));
+        user.setNationality(rs.getString("nationality"));
+        user.setEmail(rs.getString("email"));
+        user.setPhone(rs.getString("phone"));
+        return user;
+    };
+
+    public User getUserInfoByUserID(Integer userID){
+        String sql = "SELECT user_id, user_name, password, fname, lname, birth_date, gender, nationality, email, phone FROM wxy_user WHERE user_id = ?";
+        return jdbcTemplate.query(sql, new Object[]{userID}, userInfoRowMapper)
+                .stream()
+                .findFirst()
+                .orElse(null);
+    }
 }
