@@ -28,20 +28,16 @@
 
     <left>
         <VBox styleClass="sidebar">
-            <Button text="My Account" styleClass="sidebar-button"/>
+            <Button text="My Account" onAction="#accountClick" styleClass="sidebar-button"/>
             <Button text="My Orders" styleClass="sidebar-button"/>
         </VBox>
     </left>
 
     <center>
         <VBox styleClass="search-panel" alignment="CENTER" spacing="20">
-            <!-- 主标题 -->
             <Label text="Search for a Trip" styleClass="panel-title" />
-
-            <!-- 副标题 -->
             <Label text="Departure &amp; Arrival" styleClass="panel-subtitle" />
 
-            <!-- 出发地和到达地行 -->
             <HBox spacing="10" alignment="CENTER">
                 <TextField fx:id="departureField" promptText="Departure Location" styleClass="input-field" />
                 <Button fx:id="swapButton" text="⇄" styleClass="swap-button" />
@@ -55,9 +51,6 @@
                 </VBox>
                 <Button fx:id="searchButton" text="Search" styleClass="search-button"/>
             </HBox>
-
-            <!-- 搜索按钮 -->
-
         </VBox>
     </center>
 
