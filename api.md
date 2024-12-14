@@ -232,22 +232,24 @@
 
 - 方法：`POST`
 
-- URL：`/api/user/search`
+- URL：`/api/booking
 
 - 描述：生成ticket记录，
 
 - 输入：
 
-  tripid, date, departure station name, arrival station name
+  pathID, departureStationName, arrivalStationName, departureTime, arrivalTime
+
+  Example: 
 
   ```
-  Pittsburgh, Ann Arbor, 2024-12-23
+  1, New York, Orlando, 2024-12-23 11:00:00, 2024-12-23 17:00:00
   ```
 
   ```
-  Boston, Orlando, 2024-12-23
+  
   ```
 
   
 
-- 返回值：
+- 返回值：isSuccess
