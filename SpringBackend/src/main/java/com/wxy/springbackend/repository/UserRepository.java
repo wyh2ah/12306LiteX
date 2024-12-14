@@ -80,7 +80,12 @@ public class UserRepository {
         user.setPassword(rs.getString("password"));
         user.setFname(rs.getString("fname"));
         user.setLname(rs.getString("lname"));
-        user.setBirthDate(rs.getTimestamp("birth_date").toLocalDateTime());
+        if(rs.getString("birth_date") != null){
+            user.setBirthDate(rs.getTimestamp("birth_date").toLocalDateTime());
+        }else{
+            user.setBirthDate(null);
+        }
+
         user.setGender(rs.getString("gender"));
         user.setNationality(rs.getString("nationality"));
         user.setEmail(rs.getString("email"));

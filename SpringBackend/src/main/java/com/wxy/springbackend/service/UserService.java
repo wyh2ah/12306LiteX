@@ -46,6 +46,7 @@ public class UserService {
     }
 
     public User getUserInfoById(Integer userid){
+
         return userRepository.getUserInfoByUserID(userid);
     }
 

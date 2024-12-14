@@ -52,12 +52,11 @@ public class UserController {
 
     @PostMapping("/user/change_information")
     public User changeInformation(@RequestBody User user) {
-        System.out.println(user);
         return userService.changeInformation(user);
     }
 
-    @PostMapping("/user/{userId}")
-    public User getUserInfo(@PathVariable Integer userId) {
+    @GetMapping("/user/info")
+    public User getUserInfo(@RequestParam Integer userId) {
         return userService.getUserInfoById(userId);
     }
 

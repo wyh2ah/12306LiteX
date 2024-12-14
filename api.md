@@ -128,3 +128,126 @@
     ```
   
     
+
+**查询行程**
+
+- 方法：`POST`
+
+- URL：`/api/user/search`
+
+- 描述：输入出发站，到达站，日期，查询对应形成
+
+- 输入：
+
+  depart_station, arrival_station, datetime
+
+  ```
+  Pittsburgh, Ann Arbor, 2024-12-23
+  ```
+
+  ```
+  Boston, Orlando, 2024-12-23
+  ```
+
+  
+
+- 返回值：
+
+  ```json
+  [
+      {
+          "pathId": 3,
+          "stations": [
+              "Pittsburgh",
+              "Ann Arbor"
+          ],
+          "arrivalTimeList": [
+              "2024-12-23 10:00:00",
+              "2024-12-23 13:00:00"
+          ],
+          "prices_A": 451.42,
+          "prices_B": 646.28,
+          "prices_C": 1029.7,
+          "departStationId": "Pittsburgh",
+          "arrivalStationId": "Ann Arbor",
+          "aSeatsLeft": 10,
+          "bSeatsLeft": 20,
+          "cSeatsLeft": 70
+      },
+      {
+          "pathId": 5,
+          "stations": [
+              "Pittsburgh",
+              "Ann Arbor"
+          ],
+          "arrivalTimeList": [
+              "2024-12-23 11:00:00",
+              "2024-12-23 13:00:00"
+          ],
+          "prices_A": 451.42,
+          "prices_B": 646.28,
+          "prices_C": 1029.7,
+          "departStationId": "Pittsburgh",
+          "arrivalStationId": "Ann Arbor",
+          "aSeatsLeft": 10,
+          "bSeatsLeft": 20,
+          "cSeatsLeft": 70
+      }
+  ]
+  ```
+  
+  ```
+  [
+      {
+          "pathId": 1,
+          "stations": [
+              "Boston",
+              "New York",
+              "Baltimore",
+              "Richmond",
+              "Orlando"
+          ],
+          "arrivalTimeList": [
+              "2024-12-23 09:00:00",
+              "2024-12-23 11:00:00",
+              "2024-12-23 13:00:00",
+              "2024-12-23 15:00:00",
+              "2024-12-23 17:00:00"
+          ],
+          "prices_A": 1128.55,
+          "prices_B": 1615.6999999999998,
+          "prices_C": 2574.25,
+          "departStationId": "Boston",
+          "arrivalStationId": "Orlando",
+          "aSeatsLeft": 10,
+          "bSeatsLeft": 20,
+          "cSeatsLeft": 70
+      }
+  ]
+  ```
+  
+  
+
+**订票**
+
+- 方法：`POST`
+
+- URL：`/api/user/search`
+
+- 描述：生成ticket记录，
+
+- 输入：
+
+  tripid, date, departure station name, arrival station name
+
+  ```
+  Pittsburgh, Ann Arbor, 2024-12-23
+  ```
+
+  ```
+  Boston, Orlando, 2024-12-23
+  ```
+
+  
+
+- 返回值：
