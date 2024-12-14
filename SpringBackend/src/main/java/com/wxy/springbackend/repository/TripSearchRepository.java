@@ -62,11 +62,16 @@ public class TripSearchRepository {
                     ps.start_time,
                     ps.a_seats_available,
                     ps.b_seats_available,
-                    ps.c_seats_available
+                    ps.c_seats_available,
+                    t.train_name
                 FROM
                     wxy_path_station ps
                 JOIN
                     wxy_station s ON ps.station_id = s.station_id
+                JOIN
+                    wxy_path p ON ps.path_id = p.path_id
+                JOIN
+                    wxy_train t ON p.train_id = t.train_id
                 WHERE
                     ps.path_id IN (SELECT path_id FROM ValidPaths)
                 AND
@@ -86,6 +91,7 @@ public class TripSearchRepository {
                         int aseats = rs.getInt("a_seats_available");
                         int bseats = rs.getInt("b_seats_available");
                         int cseats = rs.getInt("c_seats_available");
+                        String train_name = rs.getString("train_name");
 
                         TripSearch trip = map.computeIfAbsent(path_id, id -> { //check path_id, if absent create
                            TripSearch t = new TripSearch();
@@ -94,6 +100,7 @@ public class TripSearchRepository {
                            t.setArrivalTimeList(new ArrayList<>());
                            t.setDepartStationId(depart_station);
                            t.setArrivalStationId(arrival_station);
+                           t.setTrain_name(train_name);
                            return t;
                         });
 

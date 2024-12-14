@@ -14,8 +14,17 @@ public class TripSearch {
     private int aSeatsLeft; // A 类座位剩余数量
     private int bSeatsLeft; // B
     private int cSeatsLeft;
+    private String train_name;
 
     public TripSearch() {
+    }
+
+    public String getTrain_name() {
+        return train_name;
+    }
+
+    public void setTrain_name(String train_name) {
+        this.train_name = train_name;
     }
 
     public double getPrices_C() {
@@ -121,6 +130,7 @@ public class TripSearch {
                 ", aSeatsLeft=" + aSeatsLeft +
                 ", bSeatsLeft=" + bSeatsLeft +
                 ", cSeatsLeft=" + cSeatsLeft +
+                ", train_name='" + train_name + '\'' +
                 '}';
     }
 }

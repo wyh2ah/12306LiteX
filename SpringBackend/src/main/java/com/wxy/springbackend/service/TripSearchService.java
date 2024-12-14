@@ -46,6 +46,7 @@ public class TripSearchService {
 
     public TripSearch ShowTripInfo(int pathid, String depart_station, String arrival_station, String datetime){
         List<TripSearch> res = tripSearchRepository.findAll(depart_station, arrival_station, datetime);
+
         for(TripSearch t : res){
             if(t.getPathId() == pathid){
                 return t;

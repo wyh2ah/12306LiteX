@@ -172,7 +172,8 @@
           "arrivalStationId": "Ann Arbor",
           "aSeatsLeft": 5,
           "bSeatsLeft": 20,
-          "cSeatsLeft": 70
+          "cSeatsLeft": 70,
+          "train_name": "Blue Arrow"
       },
       {
           "pathId": 5,
@@ -191,7 +192,8 @@
           "arrivalStationId": "Ann Arbor",
           "aSeatsLeft": 5,
           "bSeatsLeft": 20,
-          "cSeatsLeft": 70
+          "cSeatsLeft": 70,
+          "train_name": "Silver Horizon"
       },
       {
           "pathId": 13,
@@ -210,7 +212,8 @@
           "arrivalStationId": "Ann Arbor",
           "aSeatsLeft": 5,
           "bSeatsLeft": 20,
-          "cSeatsLeft": 70
+          "cSeatsLeft": 70,
+          "train_name": "Blue Arrow"
       },
       {
           "pathId": 15,
@@ -229,7 +232,8 @@
           "arrivalStationId": "Ann Arbor",
           "aSeatsLeft": 5,
           "bSeatsLeft": 20,
-          "cSeatsLeft": 70
+          "cSeatsLeft": 70,
+          "train_name": "Silver Horizon"
       }
   ]
   ```
@@ -259,7 +263,8 @@
           "arrivalStationId": "Orlando",
           "aSeatsLeft": 5,
           "bSeatsLeft": 20,
-          "cSeatsLeft": 70
+          "cSeatsLeft": 70,
+          "train_name": "Sunrise Express"
       },
       {
           "pathId": 11,
@@ -284,13 +289,14 @@
           "arrivalStationId": "Orlando",
           "aSeatsLeft": 5,
           "bSeatsLeft": 20,
-          "cSeatsLeft": 70
+          "cSeatsLeft": 70,
+          "train_name": "Sunrise Express"
       }
   ]
   ```
   
 
-**显示形成信息**
+**显示行程信息**
 
 - 方法：`GET`
 
@@ -357,3 +363,4 @@
   
 
 - 返回值：isSuccess
+
