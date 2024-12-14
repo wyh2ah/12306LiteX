@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
@@ -31,6 +32,8 @@ public class HomeController {
     private Button swapButton;
     @FXML
     private Button logoutButton;
+    @FXML
+    private Label searchWarnText;
 
     public void setParameters(int login_userId, String login_username) {
         this.userId = login_userId;
@@ -42,8 +45,22 @@ public class HomeController {
         departureDatePicker.setValue(LocalDate.now());
 
         swapButton.setOnAction(event -> swapLocations());
+    }
 
-        searchButton.setOnAction(event -> searchTickets());
+    @FXML
+    public void search(ActionEvent event) throws IOException, InterruptedException {
+        if (departureField.getText().isEmpty() || arrivalField.getText().isEmpty()) {
+            searchWarnText.setText("Please enter valid departure and arrival locations.");
+            return;
+        }
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("search.fxml"));
+        Scene scene = new Scene(loader.load(), 1920, 1080);
+        SearchController controller = loader.getController();
+        controller.setData(userId, username, departureField.getText(), arrivalField.getText(), departureDatePicker.getValue().toString());
+
+        Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
     }
 
     private void swapLocations() {
