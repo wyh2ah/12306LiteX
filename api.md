@@ -165,9 +165,8 @@
               "2024-12-23 10:00:00",
               "2024-12-23 13:00:00"
           ],
-          "prices_A": 451.42,
-          "prices_B": 646.28,
-          "prices_C": 1029.7,
+          "prices_A": 946.52,
+          "prices_B": 451.42,
           "departStationId": "Pittsburgh",
           "arrivalStationId": "Ann Arbor",
           "aSeatsLeft": 5,
@@ -183,9 +182,8 @@
               "2024-12-23 11:00:00",
               "2024-12-23 13:00:00"
           ],
-          "prices_A": 451.42,
-          "prices_B": 646.28,
-          "prices_C": 1029.7,
+          "prices_A": 946.52,
+          "prices_B": 451.42,
           "departStationId": "Pittsburgh",
           "arrivalStationId": "Ann Arbor",
           "aSeatsLeft": 5,
@@ -212,13 +210,12 @@
               "2024-12-23 15:00:00",
               "2024-12-23 17:00:00"
           ],
-          "prices_A": 1128.55,
-          "prices_B": 1615.6999999999998,
-          "prices_C": 2574.25,
+          "prices_A": 2366.3,
+          "prices_B": 1128.55,
           "departStationId": "Boston",
           "arrivalStationId": "Orlando",
           "aSeatsLeft": 5,
-          "cSeatsLeft": 70
+          "bSeatsLeft": 70
       }
   ]
   ```

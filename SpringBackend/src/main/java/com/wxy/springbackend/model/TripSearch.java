@@ -11,8 +11,7 @@ public class TripSearch {
     private String departStationId; // 始发站 ID
     private String arrivalStationId; // 到达站 ID
     private int aSeatsLeft; // A 类座位剩余数量
-    private int bSeatsLeft; // B 类座位剩余数量
-    private int cSeatsLeft; // C 类座位剩余数量
+    private int bSeatsLeft; // B
 
     public TripSearch() {
     }
@@ -90,13 +89,6 @@ public class TripSearch {
         this.bSeatsLeft = bSeatsLeft;
     }
 
-    public int getcSeatsLeft() {
-        return cSeatsLeft;
-    }
-
-    public void setcSeatsLeft(int cSeatsLeft) {
-        this.cSeatsLeft = cSeatsLeft;
-    }
 
     @Override
     public String toString() {
@@ -110,7 +102,6 @@ public class TripSearch {
                 ", arrivalStationId='" + arrivalStationId + '\'' +
                 ", aSeatsLeft=" + aSeatsLeft +
                 ", bSeatsLeft=" + bSeatsLeft +
-                ", cSeatsLeft=" + cSeatsLeft +
                 '}';
     }
 }

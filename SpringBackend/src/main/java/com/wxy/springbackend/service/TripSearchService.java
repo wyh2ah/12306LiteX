@@ -10,8 +10,8 @@ import java.util.List;
 @Service
 public class TripSearchService {
     private final TripSearchRepository tripSearchRepository;
-    private final double UNIT_PRICE_A = 225.71;
-    private final double UNIT_PRICE_B = 323.14;
+    private final double UNIT_PRICE_A = 473.26;
+    private final double UNIT_PRICE_B = 225.71;
 
     public TripSearchService(TripSearchRepository tripSearchRepository){
         this.tripSearchRepository = tripSearchRepository;
