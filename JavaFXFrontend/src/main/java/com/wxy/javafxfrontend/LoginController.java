@@ -1,6 +1,10 @@
 package com.wxy.javafxfrontend;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -8,6 +12,8 @@ import javafx.scene.layout.VBox;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.JsonNode;
+import javafx.stage.Stage;
+import org.controlsfx.control.action.Action;
 
 import java.io.IOException;
 import java.net.URI;
@@ -42,13 +48,13 @@ public class LoginController {
     private final HttpClient httpClient = HttpClient.newHttpClient();
 
     @FXML
-    private void onLogin() throws IOException, InterruptedException {
+    private void onLogin(ActionEvent event) throws IOException, InterruptedException {
         if (usernameField.getText().isEmpty() || passwordField.getText().isEmpty()) {
             System.out.println("Username and password cannot be empty! Try again.");
             return;
         }
 
-        String requestBody = "username=" + registerUsernameField.getText() + "&password=" + registerPasswordField.getText();
+        String requestBody = "username=" + usernameField.getText() + "&password=" + passwordField.getText();
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("http://localhost:8088/api/login"))
                 .header("Content-Type", "application/x-www-form-urlencoded")
@@ -65,12 +71,19 @@ public class LoginController {
             if ("success".equals(status)) {
                 int userId = (int) responseBody.get("userId");
                 loginWarnText.setText("Login Successful, welcome! Your User ID is: " + userId);
+
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("home.fxml"));
+                Scene scene = new Scene(loader.load(), 1920, 1080);
+                HomeController controller = loader.getController();
+                controller.setParameters(userId, usernameField.getText());
+
+                Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+                stage.setScene(scene);
+                stage.show();
             }
         } else {
             loginWarnText.setText("Login Failed, Invalid username or password.");
         }
-
-        System.out.println("Login button clicked!");
     }
 
     @FXML
@@ -91,20 +104,14 @@ public class LoginController {
                 .POST(HttpRequest.BodyPublishers.ofString(requestBody))
                 .build();
 
-        System.out.println(requestBody);
-
         HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
-
-        System.out.println(response.body());
 
         if (response.body().equals("Register Success")) {
             loginWarnText.setText("Register success! Please login.");
             switchToLogin();
         } else {
-            System.out.println("Login failed! Username or password incorrect.");
+            loginWarnText.setText("Register failed!");
         }
-
-        System.out.println("Register button clicked!");
     }
 
     @FXML
