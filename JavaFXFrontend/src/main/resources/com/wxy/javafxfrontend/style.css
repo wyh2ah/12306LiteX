@@ -10,7 +10,7 @@
 
 .root {
     -fx-background-color: #f5f7fa;
-    -fx-font-family: "Arial", sans-serif;
+    -fx-font-family: 'Libre Baskerville';
 }
 
 .headbar {
@@ -25,6 +25,13 @@
     -fx-font-size: 32px;
     -fx-font-weight: bold;
     -fx-text-fill: #2e5397;
+}
+
+.headloc {
+    -fx-font-family: 'Libre Baskerville';
+    -fx-font-size: 28px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #000000;
 }
 
 .login-panel, .register-panel {
@@ -177,8 +184,8 @@
     -fx-padding: 8;
     -fx-background-color: #ffffff;
 
-    -fx-max-width: 160;
-    -fx-max-height: 30;
+    -fx-pref-width: 160;
+    -fx-pref-height: 40;
 }
 
 .input-field:focused {
@@ -191,11 +198,8 @@
     -fx-text-fill: #ffffff;
     -fx-font-size: 17px;
     -fx-font-weight: bold;
-    -fx-padding: 8 12;
-    -fx-border-radius: 5;
-    -fx-background-radius: 5;
-    -fx-min-height: 30;
-    -fx-min-width: 30;
+    -fx-max-height: 10;
+    -fx-max-width: 10;
 }
 
 .swap-button:hover {
@@ -212,8 +216,8 @@
     -fx-padding: 8 12;
     -fx-border-radius: 5;
     -fx-background-radius: 5;
-    -fx-min-width: 160;
-    -fx-min-height: 30;
+    -fx-min-width: 180;
+    -fx-min-height: 40;
     -fx-translate-y: 13;
 }
 
@@ -282,6 +286,116 @@ ScrollPane {
 ScrollPane .viewport {
     -fx-background-color: transparent;
 }
+
+/* 新增CSS */
+/* 顶部路线和日期区域 */
+.route-date-bar {
+    -fx-background-color: #ffffff;
+    -fx-padding: 10;
+    -fx-spacing: 20;
+    -fx-alignment: center;
+    -fx-border-color: #dddddd;
+    -fx-border-width: 0 0 1 0;
+}
+
+/* 日期切换按钮 */
+.date-nav-button {
+    -fx-font-family: 'Manrope';
+    -fx-background-color: #2c3e50;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-padding: 6 10;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+}
+
+.date-nav-button:hover {
+    -fx-background-color: #717171;
+}
+
+/* 每张票的信息卡片 */
+.ticket-item {
+    -fx-background-color: #ffffff;
+    -fx-padding: 15;
+    -fx-spacing: 10;
+    -fx-border-color: #dddddd;
+    -fx-border-width: 1;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+}
+
+.ticket-header {
+    -fx-font-family: 'Libre Baskerville';
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+}
+
+.ticket-subinfo {
+    -fx-font-family: 'Libre Baskerville';
+    -fx-font-size: 14px;
+    -fx-text-fill: #555555;
+}
+
+.ticket-expand-button {
+    -fx-font-family: 'Manrope';
+    -fx-background-color: transparent;
+    -fx-text-fill: #2e5397;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-underline: true;
+    -fx-cursor: hand;
+}
+
+.ticket-expand-button:hover {
+    -fx-text-fill: #000000;
+}
+
+/* 展开的座位信息面板 */
+.seat-info-panel {
+    -fx-background-color: #f9f9f9;
+    -fx-padding: 10;
+    -fx-spacing: 10;
+    -fx-border-color: #cccccc;
+    -fx-border-width: 1;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+}
+
+.seat-type-row {
+    -fx-spacing: 10;
+    -fx-alignment: center-left;
+}
+
+.seat-type-label {
+    -fx-font-family: 'Manrope';
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+}
+
+.seat-available-label {
+    -fx-font-family: 'Manrope';
+    -fx-font-size: 14px;
+    -fx-text-fill: #333333;
+}
+
+.book-button {
+    -fx-font-family: 'Manrope';
+    -fx-background-color: #2c3e50;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-padding: 6 12;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+}
+
+.book-button:hover {
+    -fx-background-color: #717171;
+}
+
 
 
 

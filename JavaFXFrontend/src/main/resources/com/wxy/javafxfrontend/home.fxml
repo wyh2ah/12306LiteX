@@ -35,6 +35,9 @@
 
     <center>
         <VBox styleClass="search-panel" alignment="CENTER" spacing="20">
+            <ImageView fitHeight="50" fitWidth="195">
+                <Image url="@images/logo.png"/>
+            </ImageView>
             <Label text="Search for a Trip" styleClass="panel-title" />
             <Label text="Departure &amp; Arrival" styleClass="panel-subtitle" />
 
@@ -49,8 +52,10 @@
                     <Label text="Departure Date" styleClass="panel-subtitle"/>
                     <DatePicker fx:id="departureDatePicker" styleClass="input-field"/>
                 </VBox>
-                <Button fx:id="searchButton" text="Search" styleClass="search-button"/>
+                <Button fx:id="searchButton" onAction="#search" text="Search Now!" styleClass="search-button"/>
             </HBox>
+
+            <Label fx:id="searchWarnText" styleClass="panel-subtitle" alignment="CENTER"/>
         </VBox>
     </center>
 
