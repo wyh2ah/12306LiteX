@@ -145,7 +145,7 @@ public class SearchController {
         String arriveTime = arrivalTimeList.getLast();
         int stopCount = stations.size() - 2;
 
-        Label headerLabel = new Label(depart + " → " + arrival);
+        Label headerLabel = new Label(depart + " → " + arrival + " on Train: " + item.getTrain_name());
         headerLabel.getStyleClass().add("ticket-header");
 
         Label timeInfo = new Label("Departure Time: " + departTime + "   Arrival Time: " + arriveTime + "   Stop Station Number: " + stopCount);
@@ -268,6 +268,15 @@ public class SearchController {
         private int aSeatsLeft;
         private int bSeatsLeft;
         private int cSeatsLeft;
+        private String train_name;
+
+        public String getTrain_name() {
+            return train_name;
+        }
+
+        public void setTrain_name(String train_name) {
+            this.train_name = train_name;
+        }
 
         public int getPathId() {
             return pathId;

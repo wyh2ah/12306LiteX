@@ -70,14 +70,6 @@ public class HomeController {
         arrivalField.setText(from);
     }
 
-    private void searchTickets() {
-        String from = departureField.getText().trim();
-        String to = arrivalField.getText().trim();
-        LocalDate date = departureDatePicker.getValue();
-
-        // 在这里添加搜索逻辑
-        System.out.println("Searching tickets from " + from + " to " + to + " on " + date);
-    }
 
     @FXML
     private void logout(ActionEvent event) throws IOException {
@@ -94,6 +86,18 @@ public class HomeController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("account.fxml"));
         Scene scene = new Scene(loader.load(), 1920, 1080);
         AccountController controller = loader.getController();
+        controller.setParameters(this.userId, this.username);
+
+        Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    private void ordersClick(ActionEvent event) throws IOException, InterruptedException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("order.fxml"));
+        Scene scene = new Scene(loader.load(), 1920, 1080);
+        OrderController controller = loader.getController();
         controller.setParameters(this.userId, this.username);
 
         Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
