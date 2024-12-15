@@ -15,16 +15,16 @@ import java.util.Map;
 public class UserController {
     private final UserService userService;
     private final UserRepository userRepository;
+    private final String key = AESUtils.generateKey("12306LiteX");
 
-    public UserController(UserService userService, UserRepository userRepository) {
+    public UserController(UserService userService, UserRepository userRepository) throws Exception {
         this.userService = userService;
         this.userRepository = userRepository;
     }
 
     @PostMapping("/register")
     public String register(@RequestParam String username, @RequestParam String password) throws Exception {
-        String key = AESUtils.generateKey("12306LiteX");
-        System.out.println(password);
+
         String decryptPassword = AESUtils.decrypt(password, key);
         boolean success = userService.register(username, decryptPassword);
         return success ? "Register Success" : "Register Fail, Username exists or illegal";
@@ -32,7 +32,6 @@ public class UserController {
 
     @PostMapping("/login")
     public ResponseEntity<Map<String, Object>> login(@RequestParam String username, @RequestParam String password) throws Exception {
-        String key = AESUtils.generateKey("12306LiteX");
         String decryptPassword = AESUtils.decrypt(password, key);
         boolean success = userService.login(username, decryptPassword);
         Map<String, Object> response = new HashMap<>();
