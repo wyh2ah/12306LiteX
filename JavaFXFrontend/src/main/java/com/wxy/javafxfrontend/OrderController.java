@@ -106,7 +106,6 @@ public class OrderController {
 
         orderBox.getChildren().addAll(headerLabel, departureLabel, arrivalLabel, seatLabel, priceLabel, paymentStateLabel);
 
-        // 如果未支付，添加Pay Now按钮
         if (!"True".equals(order.getPaymentState())) {
             HBox buttonContainer = new HBox();
             buttonContainer.setSpacing(10);
@@ -144,7 +143,6 @@ public class OrderController {
         private String validState;
         private String paymentState;
 
-        // Getters and setters
         public int getTicketId() {
             return ticketId;
         }

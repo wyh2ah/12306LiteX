@@ -22,14 +22,12 @@
         </HBox>
     </top>
 
-    <!-- 中间为消息列表区域 -->
     <center>
         <ScrollPane fitToWidth="true" fitToHeight="true" style="-fx-background-color:transparent;">
             <VBox fx:id="chatContainer" styleClass="chat-container"/>
         </ScrollPane>
     </center>
 
-    <!-- 底部输入区 -->
     <bottom>
         <HBox spacing="10" style="-fx-padding:10;" alignment="BOTTOM_CENTER">
             <TextField fx:id="userInputField" promptText="Type your message..." styleClass="gpt-chat-field" alignment="CENTER"/>

@@ -38,7 +38,6 @@ public class SearchController {
     @FXML private Button nextDayButton;
     @FXML private VBox ticketContainer;
 
-    // 上一个页面传来的数据
     private int userId;
     private String username;
     private String departStation;
@@ -136,7 +135,6 @@ public class SearchController {
         ticketBox.getStyleClass().add("ticket-item");
         ticketBox.setSpacing(10);
 
-        // 数据解析
         String depart = item.getStations().getFirst();
         String arrival = item.getStations().getLast();
         List<String> stations = item.getStations();
@@ -163,11 +161,9 @@ public class SearchController {
         Label stopInfo = new Label(path.toString());
         stopInfo.getStyleClass().add("ticket-stopinfo");
 
-        // 展开座位信息按钮
         Label expandButton = new Label("Check Seat Occupancy");
         expandButton.getStyleClass().add("ticket-expand-button");
 
-        // 座位信息面板（默认隐藏）
         VBox seatInfoPanel = createSeatInfoPanel(item);
         seatInfoPanel.setVisible(false);
         seatInfoPanel.setManaged(false);
@@ -214,7 +210,7 @@ public class SearchController {
         Label seatTypeLabel = new Label("Seat Type: " + seatType);
         seatTypeLabel.getStyleClass().add("seat-type-label");
 
-        DecimalFormat df = new DecimalFormat("#.00"); // 格式化为两位小数
+        DecimalFormat df = new DecimalFormat("#.00");
         String formattedValue = df.format(price);
         Label priceLabel = new Label("Price: " + formattedValue);
         priceLabel.getStyleClass().add("seat-available-label");
