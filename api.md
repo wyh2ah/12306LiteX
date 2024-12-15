@@ -340,7 +340,7 @@
 
 
 
-**订票（需要上锁）**
+**订票**
 
 - 方法：`POST`
 
@@ -416,68 +416,65 @@
       }
   ]
   ```
-
   
-
+  
+  
   **订单支付**
-
+  
   - 方法：`POST`
-
-  - URL：`/api/tickets/payment`
-
-  - 描述：输入ticketid，更改invoice中payment state和valid state
-
+  
+  - URL：`/api/user/payment`
+  
+  - 描述：输入ticketid，更改invoice中payment state
+  
   - 输入：
-
+  
     ticketid
-
+  
     ```
     1
     ```
-
+  
     ```json
     2
     ```
-
+  
   - 输出：
-
+  
     String  
-
+  
     “payment success!”
-
+  
     “payment failure: already paid"
-
+  
     "payment failure: ticket has been cancelled"
-
+  
     ```
     payment failure: already paid
     ```
-
+  
     ```
     payment success!
+    
     ```
+    
+### 锁的逻辑（轻量级锁，使用CAS）
 
+```
+import java.util.concurrent.locks.ReentrantLock;
 
-  **订单取消（需要上锁）**
+public class TicketService {
+    private final ReentrantLock lock = new ReentrantLock();
 
-  - 方法：`POST`
+    public void bookTicket() {
+        lock.lock(); // 加锁
+        try {
+            // 执行购票逻辑
+        } finally {
+            lock.unlock(); // 解锁
+        }
+    }
+}
 
-  - URL：`/api/tickets/cancel`
+```
 
-  - 描述：输入ticketid，更改invoice中valid state，更改座位数字
-
-  - 输入：
-
-    ticketid
-
-    ```
-    1
-    ```
-
-    ```json
-    2
-    ```
-
-  - 输出：
-
-    "cancel success!"
