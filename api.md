@@ -458,6 +458,35 @@
     
     ```
     
+
+**订单取消**
+
+- 方法：`POST`
+
+- URL：`/api/user/cancel`
+
+- 描述：输入ticketid，更改invoice中payment state, 为对应path_station增加座位数
+
+- 输入：
+
+  ticketid
+
+  ```
+  1
+  ```
+
+  ```json
+  2
+  ```
+
+- 输出：
+
+  "cancel failure: ticket has been cancelled"
+
+  "cancel success, refund will be returned to your account in 24 hours."
+
+  "cancel success"
+
 ### 锁的逻辑（轻量级锁，使用CAS）
 
 ```

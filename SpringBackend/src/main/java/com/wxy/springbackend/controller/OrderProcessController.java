@@ -19,4 +19,9 @@ public class OrderProcessController {
     public String payment(@RequestParam int ticketid){
         return orderProcessService.payment(ticketid);
     }
+
+    @PostMapping("/ticket/cancel")
+    public String cancel(@RequestParam int ticketid){
+        return orderProcessService.cancel(ticketid);
+    }
 }

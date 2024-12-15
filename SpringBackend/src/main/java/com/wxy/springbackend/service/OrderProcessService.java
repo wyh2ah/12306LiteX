@@ -13,4 +13,8 @@ public class OrderProcessService {
     public String payment(int ticket){
         return orderProcessRepositroy.payment(ticket);
     }
+
+    public String cancel(int ticket){
+        return orderProcessRepositroy.Cancel(ticket);
+    }
 }
