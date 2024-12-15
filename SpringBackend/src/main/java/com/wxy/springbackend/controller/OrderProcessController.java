@@ -15,7 +15,7 @@ public class OrderProcessController {
         this.orderProcessService = orderProcessService;
     }
 
-    @PostMapping("/user/payment")
+    @PostMapping("/tickets/payment")
     public String payment(@RequestParam int ticketid){
         return orderProcessService.payment(ticketid);
     }
