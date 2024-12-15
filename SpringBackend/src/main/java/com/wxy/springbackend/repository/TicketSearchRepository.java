@@ -20,40 +20,39 @@ public class TicketSearchRepository {
 
     public List<TicketSearch> findAllTicket(int userid){
         String sql = """
-                SELECT
-                    
-                    t.ticket_id AS TicketID,
-                    t.price AS TicketPrice,
-                    t.date AS TicketDate,
-                    t.seat_level AS SeatLevel,
-                    i.invoice_id AS InvoiceID,
-                    i.payment_state AS PaymentState,
-                    i.valid_state AS ValidState,
-                    sd.station_name AS DepartStation,
-                    psd.start_time AS DepartTime,
-                    sa.station_name AS ArrivalStation,
-                    psa.start_time AS ArrivalTime,
-                    tr.train_name AS TrainName
-                FROM
-                    wxy_user u
-                JOIN
-                    wxy_ticket t ON u.user_id = t.user_id
-                LEFT JOIN
-                    wxy_invoice i ON t.ticket_id = i.ticket_id
-                JOIN
-                    wxy_path_station psd ON t.path_id = psd.path_id
-                JOIN
-                    wxy_station sd ON psd.station_id = sd.station_id AND psd.station_type = 'START'
-                JOIN
-                    wxy_path_station psa ON t.path_id = psa.path_id
-                JOIN
-                    wxy_station sa ON psa.station_id = sa.station_id AND psa.station_type = 'END'
-                JOIN 
-                    wxy_path p ON p.path_id = p.path_id
-                JOIN
-                    wxy_train tr ON p.train_id = tr.train_id
-                WHERE
-                    DATE(psd.start_time) = t.date and DATE(psa.start_time) = t.date and u.user_id = ?;
+                SELECT    
+                  t.ticket_id AS TicketID,
+                  t.price AS TicketPrice,
+                  t.date AS TicketDate,
+                  t.seat_level AS SeatLevel,
+                  i.invoice_id AS InvoiceID,
+                  i.payment_state AS PaymentState,
+                  i.valid_state AS ValidState,
+                  sd.station_name AS DepartStation,
+                  psd.start_time AS DepartTime,
+                  sa.station_name AS ArrivalStation,
+                  psa.start_time AS ArrivalTime,
+                  tr.train_name AS TrainName
+              FROM
+                  wxy_user u
+              JOIN
+                  wxy_ticket t ON u.user_id = t.user_id
+              LEFT JOIN
+                  wxy_invoice i ON t.ticket_id = i.ticket_id
+              JOIN
+                  wxy_path_station psd ON t.path_id = psd.path_id AND DATE(psd.start_time) = t.date
+              JOIN
+                  wxy_station sd ON psd.station_id = sd.station_id AND t.depart_station = sd.station_id
+              JOIN
+                  wxy_path_station psa ON t.path_id = psa.path_id AND DATE(psa.start_time) = t.date
+              JOIN
+                  wxy_station sa ON psa.station_id = sa.station_id AND t.arrival_station = sa.station_id
+              JOIN\s
+                  wxy_path p ON psa.path_id = p.path_id
+              JOIN
+                  wxy_train tr ON p.train_id = tr.train_id
+              WHERE
+                  u.user_id = ?;
                 """;
 
         return jdbcTemplate.query(sql, new Object[]{userid},
