@@ -396,6 +396,28 @@ ScrollPane .viewport {
     -fx-background-color: #717171;
 }
 
+.gpt-field {
+    -fx-font-family: "Libre Baskerville";
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-pref-width: 400;
+    -fx-pref-height: 50;
+}
+
+.gpt-button {
+    -fx-font-family: "Libre Baskerville";
+    -fx-background-color: #2c3e50;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-padding: 10;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-pref-width: 50;
+    -fx-pref-height: 50;
+}
+
+
 
 
 
