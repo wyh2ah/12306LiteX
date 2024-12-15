@@ -22,14 +22,19 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public String register(@RequestParam String username, @RequestParam String password) {
-        boolean success = userService.register(username, password);
+    public String register(@RequestParam String username, @RequestParam String password) throws Exception {
+        String key = AESUtils.generateKey("12306LiteX");
+        System.out.println(password);
+        String decryptPassword = AESUtils.decrypt(password, key);
+        boolean success = userService.register(username, decryptPassword);
         return success ? "Register Success" : "Register Fail, Username exists or illegal";
     }
 
     @PostMapping("/login")
-    public ResponseEntity<Map<String, Object>> login(@RequestParam String username, @RequestParam String password) {
-        boolean success = userService.login(username, password);
+    public ResponseEntity<Map<String, Object>> login(@RequestParam String username, @RequestParam String password) throws Exception {
+        String key = AESUtils.generateKey("12306LiteX");
+        String decryptPassword = AESUtils.decrypt(password, key);
+        boolean success = userService.login(username, decryptPassword);
         Map<String, Object> response = new HashMap<>();
 
         if(success){
@@ -45,8 +50,11 @@ public class UserController {
     }
 
     @PostMapping("/user/change_password")
-    public String changePassword(@RequestParam Integer userid, @RequestParam String oldPassword, @RequestParam String newPassword) {
-        boolean success = userService.resetPassword(userid, oldPassword, newPassword);
+    public String changePassword(@RequestParam Integer userid, @RequestParam String oldPassword, @RequestParam String newPassword) throws Exception {
+        String key = AESUtils.generateKey("12306LiteX");
+        String decryptOldPassword = AESUtils.decrypt(oldPassword, key);
+        String decryptNewPassword = AESUtils.decrypt(newPassword, key);
+        boolean success = userService.resetPassword(userid, decryptOldPassword, decryptNewPassword);
         return success ? "Reset Password Success" : "Reset Fail, Incorrect Old Password";
     }
 

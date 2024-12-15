@@ -46,15 +46,20 @@ public class LoginController {
     private Label loginWarnText;
 
     private final HttpClient httpClient = HttpClient.newHttpClient();
+    private final String key = AESUtils.generateKey("12306LiteX");
+
+    public LoginController() throws Exception {}
 
     @FXML
-    private void onLogin(ActionEvent event) throws IOException, InterruptedException {
+    private void onLogin(ActionEvent event) throws Exception {
         if (usernameField.getText().isEmpty() || passwordField.getText().isEmpty()) {
             System.out.println("Username and password cannot be empty! Try again.");
             return;
         }
 
-        String requestBody = "username=" + usernameField.getText() + "&password=" + passwordField.getText();
+        String encryptedPassword = AESUtils.encrypt(passwordField.getText(), key);
+
+        String requestBody = "username=" + usernameField.getText() + "&password=" + encryptedPassword;
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("http://localhost:8088/api/login"))
                 .header("Content-Type", "application/x-www-form-urlencoded")
@@ -87,7 +92,7 @@ public class LoginController {
     }
 
     @FXML
-    private void onRegister() throws IOException, InterruptedException {
+    private void onRegister() throws Exception {
         if (!Objects.equals(registerPasswordField.getText(), registerConfirmPasswordField.getText())) {
             registerWarnText.setText("Passwords do not match! Try again.");
             return;
@@ -97,7 +102,9 @@ public class LoginController {
             return;
         }
 
-        String requestBody = "username=" + registerUsernameField.getText() + "&password=" + registerPasswordField.getText();
+        String encryptedPassword = AESUtils.encrypt(registerPasswordField.getText(), key);
+
+        String requestBody = "username=" + registerUsernameField.getText() + "&password=" + encryptedPassword;
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("http://localhost:8088/api/register"))
                 .header("Content-Type", "application/x-www-form-urlencoded")

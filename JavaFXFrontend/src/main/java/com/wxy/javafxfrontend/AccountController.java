@@ -93,6 +93,9 @@ public class AccountController implements Initializable {
     private UserInfo storedUserInfo;
 
     private final HttpClient httpClient = HttpClient.newHttpClient();
+    private final String key = AESUtils.generateKey("12306LiteX");
+
+    public AccountController() throws Exception {}
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -146,13 +149,16 @@ public class AccountController implements Initializable {
     }
 
     @FXML
-    private void handleChangePassword() throws IOException, InterruptedException {
+    private void handleChangePassword() throws Exception {
         String oldPass = oldPasswordField.getText().trim();
         String newPass = newPasswordField.getText().trim();
         String confirmPass = confirmPasswordField.getText().trim();
 
         if (newPass.equals(confirmPass)) {
-            String requestBody = "userid=" + userId + "&oldPassword=" + oldPass + "&newPassword=" + newPass;
+            String encryptedOldPassword = AESUtils.encrypt(oldPass, key);
+            String encryptedNewPassword = AESUtils.encrypt(newPass, key);
+
+            String requestBody = "userid=" + userId + "&oldPassword=" + encryptedOldPassword + "&newPassword=" + encryptedNewPassword;
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create("http://localhost:8088/api/user/change_password"))
                     .header("Content-Type", "application/x-www-form-urlencoded")
