@@ -29,7 +29,7 @@
     <left>
         <VBox styleClass="sidebar">
             <Button text="My Account" onAction="#accountClick" styleClass="sidebar-button"/>
-            <Button text="My Orders" styleClass="sidebar-button"/>
+            <Button text="My Orders" onAction="#ordersClick" styleClass="sidebar-button"/>
         </VBox>
     </left>
 
