@@ -364,3 +364,57 @@
 
 - 返回值：isSuccess
 
+
+
+**查询订单**
+
+- 方法：`POST`
+
+- URL：`/api/user/tickets`
+
+- 描述：输入userid， 返回每张票的信息包括始发站，到达站，价格，日期，座位等级，和invoice 两个状态
+
+- 输入：
+
+  userid
+
+  ```
+  2
+  ```
+
+  
+
+- 输出：
+
+  ```
+  [
+      {
+          "ticketId": 1,
+          "price": 1200.0,
+          "departStationName": "New York",
+          "arrivalStationName": "Detroit",
+          "seatLevel": "A",
+          "departureTime": "2024-12-23 07:00:00",
+          "arrivalTime": "2024-12-23 16:00:00",
+          "trainName": "Emerald Voyage",
+          "invoiceId": 1,
+          "validState": "valid",
+          "paymentState": "True"
+      },
+      {
+          "ticketId": 2,
+          "price": 600.0,
+          "departStationName": "New York",
+          "arrivalStationName": "Detroit",
+          "seatLevel": "C",
+          "departureTime": "2024-12-23 14:00:00",
+          "arrivalTime": "2024-12-23 23:00:00",
+          "trainName": "Emerald Voyage",
+          "invoiceId": 2,
+          "validState": "null",
+          "paymentState": "False"
+      }
+  ]
+  ```
+  
+  

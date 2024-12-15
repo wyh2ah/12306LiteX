@@ -49,6 +49,8 @@ ALTER TABLE wxy_station ADD CONSTRAINT wxy_station_pk PRIMARY KEY ( station_id )
 CREATE TABLE wxy_ticket (
     ticket_id       INT AUTO_INCREMENT PRIMARY KEY,
     price           DECIMAL(8, 2) NOT NULL,
+    seat_level      VARCHAR(50),
+    date            DATE NOT NULL,
     user_id         INT NOT NULL,
     depart_station  INT NOT NULL,
     arrival_station INT NOT NULL,

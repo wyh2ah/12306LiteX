@@ -53,6 +53,15 @@ INSERT INTO WXY_PATH (PATH_ID, TRAIN_ID) VALUES
 (19, 9),
 (20, 10);
 
+INSERT INTO wxy_user(user_name, password) VALUES ('alan', '123');
+
+INSERT INTO wxy_ticket(user_id, price,seat_level,depart_station,arrival_station,path_id,date) VALUES
+(1, 1200, 'A', 8, 9, 3, '2024-12-23'),
+(1, 600, 'C', 8, 9, 13, '2024-12-23');
+
+INSERT INTO wxy_invoice(ticket_id, payment_state, valid_state) VALUES
+(1, 'True', 'valid'),
+(2, 'False', 'null');
 
 -- Dec.23 -Dec.29 
 INSERT INTO wxy_path_station (path_id, station_id, station_type, start_time, a_seats_available, b_seats_available, c_seats_available) VALUES
