@@ -418,3 +418,43 @@
   ```
   
   
+  
+  **订单支付**
+  
+  - 方法：`POST`
+  
+  - URL：`/api/user/payment`
+  
+  - 描述：输入ticketid，更改invoice中payment state
+  
+  - 输入：
+  
+    ticketid
+  
+    ```
+    1
+    ```
+  
+    ```json
+    2
+    ```
+  
+  - 输出：
+  
+    String  
+  
+    “payment success!”
+  
+    “payment failure: already paid"
+  
+    "payment failure: ticket has been cancelled"
+  
+    ```
+    payment failure: already paid
+    ```
+  
+    ```
+    payment success!
+    ```
+  
+    

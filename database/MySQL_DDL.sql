@@ -10,7 +10,7 @@ ALTER TABLE wxy_invoice
     ADD CHECK ( valid_state IN ( 'null', 'refund', 'reschedule', 'valid' ) );
 
 ALTER TABLE wxy_invoice
-    ADD CHECK ( payment_state IN ( 'TRUE', 'FALSE' ) );
+    ADD CHECK ( payment_state IN ( 'true', 'false' ) );
 
 CREATE UNIQUE INDEX wxy_invoice__idx ON
     wxy_invoice (

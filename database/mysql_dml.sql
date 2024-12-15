@@ -60,8 +60,9 @@ INSERT INTO wxy_ticket(user_id, price,seat_level,depart_station,arrival_station,
 (1, 600, 'C', 8, 9, 13, '2024-12-23');
 
 INSERT INTO wxy_invoice(ticket_id, payment_state, valid_state) VALUES
-(1, 'True', 'valid'),
-(2, 'False', 'null');
+(1, 'true', 'valid'),
+(2, 'false', 'null');
+
 
 -- Dec.23 -Dec.29 
 INSERT INTO wxy_path_station (path_id, station_id, station_type, start_time, a_seats_available, b_seats_available, c_seats_available) VALUES
