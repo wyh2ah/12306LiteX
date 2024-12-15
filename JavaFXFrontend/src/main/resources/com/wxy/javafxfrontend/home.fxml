@@ -37,7 +37,7 @@
         <VBox styleClass="search-panel" alignment="CENTER" spacing="20">
             <HBox spacing="10" alignment="CENTER">
                 <TextField fx:id="gptField" promptText="Hi, how can I help you?" styleClass="gpt-field" />
-                <Button fx:id="gptButton" text="🔍" styleClass="gpt-button" />
+                <Button fx:id="gptButton" text="🔍" onAction="#gptClick" styleClass="gpt-button" />
             </HBox>
 
             <ImageView fitHeight="50" fitWidth="195">

@@ -34,6 +34,10 @@ public class HomeController {
     private Button logoutButton;
     @FXML
     private Label searchWarnText;
+    @FXML
+    private TextField gptField;
+    @FXML
+    private Button gptButton;
 
     public void setParameters(int login_userId, String login_username) {
         this.userId = login_userId;
@@ -99,6 +103,18 @@ public class HomeController {
         Scene scene = new Scene(loader.load(), 1920, 1080);
         OrderController controller = loader.getController();
         controller.setParameters(this.userId, this.username);
+
+        Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    private void gptClick(ActionEvent event) throws IOException, InterruptedException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("gpt.fxml"));
+        Scene scene = new Scene(loader.load(), 1920, 1080);
+        GptController controller = loader.getController();
+        controller.setInitialMessage(this.userId, this.username, gptField.getText());
 
         Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
         stage.setScene(scene);

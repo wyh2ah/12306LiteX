@@ -35,7 +35,7 @@
                 <VBox spacing="10">
                     <Label text="User Information" styleClass="panel-title"/>
                     <Label fx:id="userNameLabel" text="Username: " styleClass="panel-subtitle"/>
-                    <Label fx:id="infoIncompleteLabel" text="Please update your information." styleClass="warn-text" visible="false"/>
+                    <Label fx:id="infoIncompleteLabel" text="Welcome, please update your information in `Edit Profile Section`." styleClass="panel-subtitle" visible="false"/>
                     <Label fx:id="fnameLabel" text="First Name: " visible="false" styleClass="panel-subtitle"/>
                     <Label fx:id="lnameLabel" text="Last Name: " visible="false" styleClass="panel-subtitle"/>
                     <Label fx:id="birthDateLabel" text="Birth Date: " visible="false" styleClass="panel-subtitle"/>
