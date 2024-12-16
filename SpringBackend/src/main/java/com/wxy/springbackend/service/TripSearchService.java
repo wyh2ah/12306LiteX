@@ -21,8 +21,8 @@ public class TripSearchService {
     public List<TripSearch> getAllTrip(String depart_station, String arrival_station, String datetime){
         depart_station = depart_station.toLowerCase();
         arrival_station = arrival_station.toLowerCase();
-        System.out.println(depart_station);
-        System.out.println(arrival_station);
+//        System.out.println(depart_station);
+//        System.out.println(arrival_station);
         List<TripSearch> res = tripSearchRepository.findAll(depart_station, arrival_station, datetime);
 
         int count = 0;

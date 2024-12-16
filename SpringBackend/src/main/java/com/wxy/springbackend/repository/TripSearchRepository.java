@@ -95,6 +95,7 @@ public class TripSearchRepository {
                         int bseats = rs.getInt("b_seats_available");
                         int cseats = rs.getInt("c_seats_available");
                         String train_name = rs.getString("train_name");
+//                        System.out.println(path_id + " "+station_name +" "+ start_time + " "+aseats + " "+bseats + " "+cseats + " "+train_name);
 
                         TripSearch trip = map.computeIfAbsent(path_id, id -> { //check path_id, if absent create
                            TripSearch t = new TripSearch();
@@ -104,6 +105,7 @@ public class TripSearchRepository {
                            t.setDepartStationId(depart_station);
                            t.setArrivalStationId(arrival_station);
                            t.setTrain_name(train_name);
+//                           System.out.println(t);
                            return t;
                         });
 
@@ -117,6 +119,7 @@ public class TripSearchRepository {
                             minSeatA = min(minSeatA, aseats);
                             minSeatB = min(minSeatB, bseats);
                             minSeatC = min(minSeatC, cseats);
+//                            System.out.println(trip);
                         }else if(station_name.equals(arrival_station)){
                             trip.getStations().add(station_name);
                             trip.getArrivalTimeList().add(start_time);
@@ -127,12 +130,14 @@ public class TripSearchRepository {
                             trip.setaSeatsLeft(minSeatA);
                             trip.setbSeatsLeft(minSeatB);
                             trip.setcSeatsLeft(minSeatC);
+
                         }else if(flag){
                             trip.getStations().add(station_name);
                             trip.getArrivalTimeList().add(start_time);
                             minSeatA = min(minSeatA, aseats);
                             minSeatB = min(minSeatB, bseats);
                             minSeatC = min(minSeatC, cseats);
+
                         }
 
 
