@@ -25,6 +25,7 @@ public class BookingController {
         try {
             boolean success = bookingService.bookTicket(booking);
             response.put("success", success);
+            response.put("error", "None");
             return response;
         } catch (Exception e) {
             response.put("success", false);
