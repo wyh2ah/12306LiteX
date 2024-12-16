@@ -70,9 +70,9 @@ Now this is the user's request:
     public Map<String, Object> getResponse(String message) {
         try {
             String input = systemPrompt + message;
-            System.out.println(input);
+//            System.out.println(input);
             String llmOutput = chatLanguageModel.generate(input);
-            System.out.println(llmOutput);
+//            System.out.println(llmOutput);
             // Parse the JSON string into a Map
             return objectMapper.readValue(llmOutput, new TypeReference<Map<String, Object>>() {});
         } catch (Exception e) {
