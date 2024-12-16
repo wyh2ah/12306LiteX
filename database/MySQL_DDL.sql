@@ -7,7 +7,7 @@ CREATE TABLE wxy_invoice (
 );
 
 ALTER TABLE wxy_invoice
-    ADD CHECK ( valid_state IN ('pending','refund', 'reschedule', 'valid' ) );
+    ADD CHECK ( valid_state IN ('pending','refund', 'reschedule', 'valid', 'cancelled' ) );
 
 ALTER TABLE wxy_invoice
     ADD CHECK ( payment_state IN ( 'true', 'false' ) );

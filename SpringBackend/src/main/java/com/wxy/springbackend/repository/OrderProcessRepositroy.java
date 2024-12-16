@@ -85,18 +85,10 @@ public class OrderProcessRepositroy {
                 }
         );
 
-        if(order.getValidState().equals("refund")){
+        if(order.getValidState().equals("refund") || order.getValidState().equals("cancelled")){
             return "cancel failure: ticket has been cancelled";
         }else{
-            //update invoice state
-            jdbcTemplate.update("""
-                    UPDATE wxy_invoice
-                    SET
-                        valid_state = 'refund'
-                    WHERE
-                        invoice_id = ?;
-                    """,
-                    order.getInvoiceId());
+
 
             //add seat number back
             jdbcTemplate.update("""
@@ -150,8 +142,24 @@ public class OrderProcessRepositroy {
 
 
             if(order.getPaymentState().equals("true")){
+                jdbcTemplate.update("""
+                    UPDATE wxy_invoice
+                    SET
+                        valid_state = 'refund'
+                    WHERE
+                        invoice_id = ?;
+                    """,
+                        order.getInvoiceId());
                 return "refund success";
             }else{
+                jdbcTemplate.update("""
+                    UPDATE wxy_invoice
+                    SET
+                        valid_state = 'cancelled'
+                    WHERE
+                        invoice_id = ?;
+                    """,
+                        order.getInvoiceId());
                 return "cancel success";
             }
         }
