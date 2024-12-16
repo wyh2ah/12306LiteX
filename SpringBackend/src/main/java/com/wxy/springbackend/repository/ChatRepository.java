@@ -12,6 +12,7 @@ import dev.langchain4j.data.message.ChatMessage;
 import org.springframework.transaction.annotation.Transactional;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -29,7 +30,16 @@ public class ChatRepository{
             "MyOrders",
             "ShowTrains(From, To, Date)"
     );
+    private static String getUsefulInfo(String userLocation) { // Trivial implementation of Function Call
+        LocalDate today = LocalDate.now();
+        String date = today.toString(); // Format: YYYY-MM-DD
 
+        return String.format("""
+Some useful knowledge you may need:
+- Today's date: %s
+- User's location: %s
+""", date, userLocation);
+    }
     // Convert instructions to a string (e.g., [Search, MyAccount, MyOrders, ShowTrains(From, To, Date)])
     String windowsListString = windowsList.toString();
 
@@ -43,7 +53,8 @@ public class ChatRepository{
 
     // Join the descriptions into a readable string with line breaks
     String instructionsDescriptionString = String.join("\n", instructionsDescription);
-    String systemPrompt = String.format("""
+
+    String systemPrompt = """
 You are a train ticket subscription assistant. Your role has two main parts:
 
 If the user wants to use a specific feature (e.g., searching for trains, changing passwords), you must indicate which window to navigate to. The frontend will handle the actual transition; you only need to provide the appropriate instruction. A list of all possible instructions is given below: %s
@@ -54,6 +65,8 @@ Here is the description of each instruction:
 %s
 
 If the user is simply engaging in casual conversation or asking general questions, respond with wit and humor without instructing a window change. If the user's request does not correspond to any of the provided instructions, please apologize and indicate that no such function exists.
+
+%s
 
 Response Format:
 Always reply in JSON as follows, DO NOT provide any other words so that it will be failed to convert to JSON file:
@@ -66,10 +79,13 @@ Always reply in JSON as follows, DO NOT provide any other words so that it will 
 }
 
 Now this is the user's request:
-""", windowsListString, instructionsDescriptionString);
+""";
     public Map<String, Object> getResponse(String message) {
         try {
-            String input = systemPrompt + message;
+            String userLocation = "New York"; // May get this param from the Frontend
+            String usefulInfo = getUsefulInfo(userLocation);
+            String basePrompt = String.format(systemPrompt, windowsListString, instructionsDescriptionString, usefulInfo);
+            String input = basePrompt + message;
 //            System.out.println(input);
             String llmOutput = chatLanguageModel.generate(input);
 //            System.out.println(llmOutput);
