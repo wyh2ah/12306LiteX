@@ -28,7 +28,7 @@ public class ChatRepository{
             "Search",
             "MyAccount",
             "MyOrders",
-            "ShowTrains(From, To, Date)"
+            "ShowTrains"
     );
     private static String getUsefulInfo(String userLocation) { // Trivial implementation of Function Call
         LocalDate today = LocalDate.now();
@@ -45,10 +45,10 @@ Some useful knowledge you may need:
 
     // Define the descriptions as another list
     List<String> instructionsDescription = List.of(
-            "\"Search\": Opens a search interface for looking up train tickets.",
-            "\"MyAccount\": Displays the user's personal information and allows changing passwords, usernames, or editing their profile.",
-            "\"MyOrders\": Shows the user's order history, including both unpaid and paid tickets.",
-            "\"ShowTrains(From, To, Date)\": Displays trains from the specified origin to the specified destination on the given date (YYYY-MM-DD)."
+            "Search: Opens a search interface for looking up train tickets.",
+            "MyAccount: Displays the user's personal information and allows changing passwords, usernames, or editing their profile.",
+            "MyOrders: Shows the user's order history, including both unpaid and paid tickets.",
+            "ShowTrains: Three param (From, To, Date) Displays trains from the specified origin to the specified destination on the given date (YYYY-MM-DD)."
     );
 
     // Join the descriptions into a readable string with line breaks

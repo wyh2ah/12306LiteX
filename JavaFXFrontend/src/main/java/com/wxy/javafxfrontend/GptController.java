@@ -1,5 +1,7 @@
 package com.wxy.javafxfrontend;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -8,6 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.control.Hyperlink;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -84,47 +87,117 @@ public class GptController {
         chatContainer.getChildren().add(messageBox);
     }
 
-    private void getGptResponse(String userMessage) {
-        // 调用GPT接口，假设有一个HTTP接口: POST http://localhost:8088/api/gpt
-        // 请求体包含 { "message": "..."} 并返回 { "response": "..." }
-        // 根据实际API调整
+    private void addGptHyperLink(String instruction, String param1, String param2, String param3) {
+        HBox messageBox = new HBox();
+        messageBox.getStyleClass().add("message-box-gpt");
 
+        Hyperlink hyperlink = new Hyperlink("Click here to " + instruction);
+        hyperlink.setOnAction(event -> callback(event, instruction, param1, param2, param3));
+        hyperlink.getStyleClass().add("gpt-message");
+        hyperlink.setWrapText(true);
+        messageBox.getChildren().add(hyperlink);
+        chatContainer.getChildren().add(messageBox);
+    }
+
+    private void callback(ActionEvent event, String instruction, String param1, String param2, String param3) {
+        System.out.println(instruction + param1 + param2 + param3);
+        switch (instruction) {
+            case "Search": {
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("home.fxml"));
+                    Scene scene = new Scene(loader.load(), Settings.get_x(), Settings.get_y());
+                    HomeController controller = loader.getController();
+                    controller.setParameters(userId, username);
+
+                    Stage stage = (Stage) chatContainer.getScene().getWindow();
+                    stage.setScene(scene);
+                    stage.show();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                break;
+            }
+
+            case "MyAccount" : {
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("account.fxml"));
+                    Scene scene = new Scene(loader.load(), Settings.get_x(), Settings.get_y());
+                    AccountController controller = loader.getController();
+                    controller.setParameters(userId, username);
+
+                    Stage stage = (Stage) chatContainer.getScene().getWindow();
+                    stage.setScene(scene);
+                    stage.show();
+                } catch (IOException | InterruptedException e) {
+                    e.printStackTrace();
+                }
+                break;
+            }
+
+            case "MyOrders" : {
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("order.fxml"));
+                    Scene scene = new Scene(loader.load(), Settings.get_x(), Settings.get_y());
+                    OrderController controller = loader.getController();
+                    controller.setParameters(userId, username);
+
+                    Stage stage = (Stage) chatContainer.getScene().getWindow();
+                    stage.setScene(scene);
+                    stage.show();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                break;
+            }
+
+            case "ShowTrains" : {
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("search.fxml"));
+                    Scene scene = new Scene(loader.load(), Settings.get_x(), Settings.get_y());
+                    SearchController controller = loader.getController();
+                    controller.setData(userId, username, param1, param2, param3);
+
+                    Stage stage = (Stage) chatContainer.getScene().getWindow();
+                    stage.setScene(scene);
+                    stage.show();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+                break;
+            }
+
+        }
+
+    }
+
+    private void getGptResponse(String userMessage) {
         try {
-            String requestBody = "{\"message\":\"" + userMessage.replace("\"", "\\\"") + "\"}";
+            String requestBody = "message=" + userMessage;
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create("http://localhost:8088/api/chat"))
-                    .header("Content-Type", "application/json")
+                    .header("Content-Type", "application/x-www-form-urlencoded")
                     .POST(HttpRequest.BodyPublishers.ofString(requestBody))
                     .build();
 
-            httpClient.sendAsync(request, HttpResponse.BodyHandlers.ofString())
-                    .thenAccept(response -> {
-                        // 假设返回json: {"response":"GPT的回答..."}
-                        String responseBody = response.body();
-                        String gptReply = parseGptResponse(responseBody);
-                        javafx.application.Platform.runLater(() -> addGptMessage(gptReply));
-                    });
+            HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+
+            if (response.body() == null) {
+                javafx.application.Platform.runLater(() -> addGptMessage("Error getting response."));
+                return;
+            }
+
+            ObjectMapper objectMapper = new ObjectMapper();
+            JsonNode responseJson = objectMapper.readTree(response.body());
+            javafx.application.Platform.runLater(() -> addGptMessage(responseJson.get("message").asText()));
+            if (responseJson.hasNonNull("Instruction")) {
+                javafx.application.Platform.runLater(() -> addGptHyperLink(responseJson.get("Instruction").asText(), responseJson.get("Param1").asText(), responseJson.get("Param2").asText(), responseJson.get("Param3").asText()));
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
             javafx.application.Platform.runLater(() -> addGptMessage("Error getting response."));
         }
-    }
-
-    private String parseGptResponse(String jsonResponse) {
-
-        // 简单解析字符串中的response字段
-        // 实际应使用JSON解析库
-        // 假设返回格式: {"response":"GPT的回答..."}
-        int index = jsonResponse.indexOf("\"response\"");
-        if (index != -1) {
-            int start = jsonResponse.indexOf(":", index) + 1;
-            int end = jsonResponse.lastIndexOf("\"");
-            if (start > 0 && end > start) {
-                String trimmed = jsonResponse.substring(start, end).trim();
-                trimmed = trimmed.replaceAll("^\"|\"$", "");
-                return trimmed;
-            }
-        }
-        return "No response from GPT.";
     }
 }
