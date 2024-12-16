@@ -117,15 +117,15 @@ public class TripSearchRepository {
                             minSeatB = 1000;
                             minSeatC = 1000;
                             minSeatA = min(minSeatA, aseats);
-                            minSeatB = min(minSeatB, aseats);
-                            minSeatC = min(minSeatC, aseats);
+                            minSeatB = min(minSeatB, bseats);
+                            minSeatC = min(minSeatC, cseats);
                         }else if(station_name.equals(arrival_station)){
                             trip.getStations().add(station_name);
                             trip.getArrivalTimeList().add(start_time);
                             flag = false;
                             minSeatA = min(minSeatA, aseats);
-                            minSeatB = min(minSeatB, aseats);
-                            minSeatC = min(minSeatC, aseats);
+                            minSeatB = min(minSeatB, bseats);
+                            minSeatC = min(minSeatC, cseats);
                             trip.setaSeatsLeft(minSeatA);
                             trip.setbSeatsLeft(minSeatB);
                             trip.setcSeatsLeft(minSeatC);
@@ -133,8 +133,8 @@ public class TripSearchRepository {
                             trip.getStations().add(station_name);
                             trip.getArrivalTimeList().add(start_time);
                             minSeatA = min(minSeatA, aseats);
-                            minSeatB = min(minSeatB, aseats);
-                            minSeatC = min(minSeatC, aseats);
+                            minSeatB = min(minSeatB, bseats);
+                            minSeatC = min(minSeatC, cseats);
                         }
 
 

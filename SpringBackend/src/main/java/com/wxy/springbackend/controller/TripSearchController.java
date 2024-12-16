@@ -30,7 +30,7 @@ public class TripSearchController {
                                @RequestParam String depart_station,
                                @RequestParam String arrival_station,
                                @RequestParam String datetime){
-
+        System.out.println(depart_station);
         return tripSearchService.ShowTripInfo(pathid, depart_station, arrival_station, datetime);
     }
 }
