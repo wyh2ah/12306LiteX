@@ -29,15 +29,52 @@
 
 ### Features
 
-- GUI
-- Threads
-- Database
-- Spring Framework
-- Java RESTful APIs and Web Service
+- GUI (JavaFX)
+- [Not Java threads]Threads (SpringBoot Tomcat & Hikari)
+- Database (MySQL)
+- SpringBoot Framework
+- Java RESTful APIs and Web Service (HTTP request)
 - JDBC
--  ...
+-  Sychronization ReentrantLock (Atomic book operation)
+-  Security (AES Password Encryption)
 
 
+
+### How To Run (Prefer using Jetbrains IDEA)
+
+- Run your MySQL server, note its port and location
+
+- Config `src/main/resources/application.properties`
+
+  ```
+  spring.application.name=SpringBackend
+  
+  spring.datasource.url=//replace with database url
+  spring.datasource.username=//replace with database username
+  spring.datasource.password=//replace with database password
+  spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+  spring.jpa.show-sql=true
+  spring.jpa.properties.hibernate.format_sql=true
+  spring.jpa.hibernate.ddl-auto=update
+  server.port=8088
+  
+  server.tomcat.threads.max=300
+  server.tomcat.threads.min-spare=30
+  server.tomcat.accept-count=200
+  
+  spring.datasource.hikari.maximum-pool-size=30
+  spring.datasource.hikari.connection-timeout=20000
+  spring.datasource.hikari.minimum-idle=10
+  
+  langchain4j.open-ai.chat-model.api-key=//replace with OpenAI token
+  langchain4j.open-ai.chat-model.model-name=gpt-4o-mini
+  langchain4j.open-ai.chat-model.log-requests=true
+  langchain4j.open-ai.chat-model.log-responses=true
+  ```
+
+- Make sure IDEA recognize and load `Maven` correctly.
+- Run `src/main/java/com/wxy/springbackend/SpringBackendApplication.java`
+- Run `src/main/java/com/wxy/javafxfrontend/JavaFXApplication.java`
 
 ### Basic Function
 
@@ -77,7 +114,7 @@ We aim to develop an AI-based assistant within the app that can guide users effi
 
 ### Backend
 
-![backend](C:\Users\zhouw\Desktop\CS9053\project\12306LiteX\images\backend.png)
+![backend](.\images\backend.png)
 
 For backend, we use Java RESTful APIs for web service and JDBC APIs for database query and update.
 

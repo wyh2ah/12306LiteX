@@ -68,8 +68,6 @@ public class SearchController {
 
         HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
 
-        System.out.println(response.body());
-
         ObjectMapper mapper = new ObjectMapper();
         CollectionType listType = mapper.getTypeFactory().constructCollectionType(List.class, TripSearch.class);
         ticketData = mapper.readValue(response.body(), listType);
