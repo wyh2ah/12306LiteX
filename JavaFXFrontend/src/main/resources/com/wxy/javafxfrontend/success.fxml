@@ -17,7 +17,7 @@
 
     <center>
         <VBox spacing="20" styleClass="success-panel" alignment="CENTER">
-            <Label text="Payment Successful! Thank you for your trust!" styleClass="panel-title"/>
+            <Label fx:id="successLabel" text="Payment Successful! Thank you for your trust!" styleClass="panel-title"/>
             <Button text="Back to Home" onAction="#backToHome" styleClass="action-button"/>
         </VBox>
     </center>

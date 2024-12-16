@@ -104,10 +104,15 @@ public class OrderController {
         Label paymentStateLabel = new Label("Payment State: " + (order.getPaymentState().equals("true") ? "Paid" : "Not Paid"));
         paymentStateLabel.getStyleClass().add("order-info-label");
 
-        orderBox.getChildren().addAll(headerLabel, departureLabel, arrivalLabel, seatLabel, priceLabel, paymentStateLabel);
+        Label statusLabel = new Label("Status: " + order.getValidState());
+        priceLabel.getStyleClass().add("order-price-label");
 
+        orderBox.getChildren().addAll(headerLabel, departureLabel, arrivalLabel, seatLabel, priceLabel, paymentStateLabel, statusLabel);
+
+        HBox buttonContainer = new HBox();
+        boolean isPaid = false;
         if (!"true".equals(order.getPaymentState())) {
-            HBox buttonContainer = new HBox();
+            isPaid = true;
             buttonContainer.setSpacing(10);
 
             Button payNowButton = new Button("Pay Now");
@@ -118,7 +123,60 @@ public class OrderController {
             orderBox.getChildren().add(buttonContainer);
         }
 
+        if (!"refund".equals(order.getValidState())) {
+            buttonContainer.setSpacing(10);
+
+            Button cancelButton = new Button("Cancel/Refund");
+            cancelButton.getStyleClass().add("pay-now-button");
+            cancelButton.setOnAction(event -> {
+                try {
+                    handleCancel(event, order);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            });
+
+            buttonContainer.getChildren().add(cancelButton);
+            if (!isPaid) orderBox.getChildren().add(buttonContainer);
+        }
+
         return orderBox;
+    }
+
+    private void handleCancel(ActionEvent event, OrderItem order) throws IOException, InterruptedException {
+        String requestBody = "ticketid=" + order.getTicketId();
+        String url = "http://localhost:8088/api/ticket/cancel";
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(url))
+                .header("Content-Type", "application/x-www-form-urlencoded")
+                .POST(HttpRequest.BodyPublishers.ofString(requestBody))
+                .build();
+
+        HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+
+        if ("cancel success".equals(response.body())) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("success.fxml"));
+            Scene scene = new Scene(loader.load(), 1920, 1080);
+            SuccessController controller = loader.getController();
+            controller.setParameters(userId, username);
+            controller.setSuccessLabel("Cancel Success! Please return to Home to proceed.");
+
+            Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } else if ("refund success".equals(response.body())) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("success.fxml"));
+            Scene scene = new Scene(loader.load(), 1920, 1080);
+            SuccessController controller = loader.getController();
+            controller.setParameters(userId, username);
+            controller.setSuccessLabel("Refund Success! Please return to Home to proceed.");
+
+            Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        }
     }
 
     private void handlePayNow(ActionEvent event, OrderItem order) {

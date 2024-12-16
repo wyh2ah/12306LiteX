@@ -150,7 +150,7 @@ public class OrderProcessRepositroy {
 
 
             if(order.getPaymentState().equals("true")){
-                return "cancel success, refund will be returned to your account in 24 hours.";
+                return "refund success";
             }else{
                 return "cancel success";
             }

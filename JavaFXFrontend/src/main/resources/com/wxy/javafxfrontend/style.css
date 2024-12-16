@@ -461,7 +461,7 @@ ScrollPane .viewport {
     -fx-padding: 8 14;
     -fx-border-radius: 5;
     -fx-background-radius: 5;
-    -fx-max-width: 100;
+    -fx-pref-width: 150;
     -fx-alignment: CENTER;
     -fx-max-height: 30;
 }

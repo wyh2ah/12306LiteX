@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -12,6 +13,13 @@ import java.io.IOException;
 public class SuccessController {
     private int userId;
     private String username;
+
+    @FXML
+    private Label successLabel;
+
+    public void setSuccessLabel(String successMessage) {
+        successLabel.setText(successMessage);
+    }
 
     public void setParameters(int userId, String username) {
         this.userId = userId;
