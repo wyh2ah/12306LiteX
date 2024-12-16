@@ -10,6 +10,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static java.lang.Math.min;
+
 @Repository
 public class TripSearchRepository {
     private final JdbcTemplate jdbcTemplate;
@@ -84,6 +86,9 @@ public class TripSearchRepository {
                     Map<Integer, TripSearch> map = new HashMap<>();
 
                     boolean flag = false;
+                    int minSeatA = 1000;
+                    int minSeatB = 1000;
+                    int minSeatC = 1000;
                     while(rs.next()) {
                         int path_id = rs.getInt("path_id");
                         String station_name = rs.getString("station_name");
@@ -108,16 +113,28 @@ public class TripSearchRepository {
                             flag = true;
                             trip.getStations().add(station_name);
                             trip.getArrivalTimeList().add(start_time);
-                            trip.setaSeatsLeft(aseats);
-                            trip.setbSeatsLeft(bseats);
-                            trip.setcSeatsLeft(cseats);
+                            minSeatA = 1000;
+                            minSeatB = 1000;
+                            minSeatC = 1000;
+                            minSeatA = min(minSeatA, aseats);
+                            minSeatB = min(minSeatB, aseats);
+                            minSeatC = min(minSeatC, aseats);
                         }else if(station_name.equals(arrival_station)){
                             trip.getStations().add(station_name);
                             trip.getArrivalTimeList().add(start_time);
                             flag = false;
+                            minSeatA = min(minSeatA, aseats);
+                            minSeatB = min(minSeatB, aseats);
+                            minSeatC = min(minSeatC, aseats);
+                            trip.setaSeatsLeft(minSeatA);
+                            trip.setbSeatsLeft(minSeatB);
+                            trip.setcSeatsLeft(minSeatC);
                         }else if(flag){
                             trip.getStations().add(station_name);
                             trip.getArrivalTimeList().add(start_time);
+                            minSeatA = min(minSeatA, aseats);
+                            minSeatB = min(minSeatB, aseats);
+                            minSeatC = min(minSeatC, aseats);
                         }
 
 
