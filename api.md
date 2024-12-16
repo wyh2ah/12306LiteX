@@ -487,6 +487,59 @@
 
   "cancel success"
 
+**获得所有行程**
+
+- 方法：`GET`
+
+- URL：`/api/path_station`
+
+- 描述：无输入，获得所有行程
+
+- 输入：
+
+- 输出：
+
+  ```json
+  [
+      {
+          "pathid": 1,
+          "start_time": "2024-12-23 07:00:00",
+          "station_id": 1,
+          "station_name": "Portland",
+          "station_type": "start",
+          "train_name": "Sunrise Express",
+          "a_seats_available": 5,
+          "b_seats_available": 20,
+          "c_seats_available": 70
+      },
+      {
+          "pathid": 1,
+          "start_time": "2024-12-23 09:00:00",
+          "station_id": 2,
+          "station_name": "Boston",
+          "station_type": "stop",
+          "train_name": "Sunrise Express",
+          "a_seats_available": 5,
+          "b_seats_available": 20,
+          "c_seats_available": 70
+      },
+      
+      ....
+      
+       {
+          "pathid": 20,
+          "start_time": "2024-12-31 23:00:00",
+          "station_id": 10,
+          "station_name": "Detroit",
+          "station_type": "end",
+          "train_name": "Emerald Voyage",
+          "a_seats_available": 5,
+          "b_seats_available": 20,
+          "c_seats_available": 70
+      }
+  ]   
+  ```
+
 ### 锁的逻辑（轻量级锁，使用CAS）
 
 ```
