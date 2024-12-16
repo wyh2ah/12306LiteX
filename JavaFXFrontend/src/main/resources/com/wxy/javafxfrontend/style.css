@@ -560,7 +560,27 @@ ScrollPane .viewport {
     -fx-max-width: 1000;
 }
 
+.payment-panel, .search-panel, .content-panel {
+    -fx-background-color: #ffffff;
+    -fx-padding: 30;
+    -fx-spacing: 20;
+    -fx-border-color: #dddddd;
+    -fx-border-width: 1;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-effect: dropshadow(one-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 2);
+}
 
+.schedule-container {
+    -fx-background-color: #ffffff;
+    -fx-padding: 30;
+    -fx-spacing: 20;
+    -fx-border-color: #dddddd;
+    -fx-border-width: 1;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-effect: dropshadow(one-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 2);
+}
 
 
 

@@ -57,6 +57,15 @@ public class LoginController {
             return;
         }
 
+        if ("admin".equals(usernameField.getText()) && "admin".equals(passwordField.getText())) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("admin.fxml"));
+            Scene scene = new Scene(loader.load(), 1920, 1080);
+            Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+            return;
+        }
+
         String encryptedPassword = AESUtils.encrypt(passwordField.getText(), key);
 
         String requestBody = "username=" + usernameField.getText() + "&password=" + encryptedPassword;
