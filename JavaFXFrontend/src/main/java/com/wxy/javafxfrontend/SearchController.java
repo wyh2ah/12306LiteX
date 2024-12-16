@@ -1,6 +1,7 @@
 package com.wxy.javafxfrontend;
 
 import java.lang.reflect.Type;
+import java.math.BigDecimal;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -11,6 +12,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.CollectionType;
@@ -190,19 +192,16 @@ public class SearchController {
         int bLeft = item.getbSeatsLeft();
         int cLeft = item.getcSeatsLeft();
 
-        // A座位
-        HBox aRow = createSeatRow("A Class", aLeft, priceA);
-        // B座位
-        HBox bRow = createSeatRow("B Class", bLeft, priceB);
-        // C座位
-        HBox cRow = createSeatRow("C Class", cLeft, priceC);
+        HBox aRow = createSeatRow("A", aLeft, priceA, item);
+        HBox bRow = createSeatRow("B", bLeft, priceB, item);
+        HBox cRow = createSeatRow("C", cLeft, priceC, item);
 
         seatPanel.getChildren().addAll(aRow, bRow, cRow);
 
         return seatPanel;
     }
 
-    private HBox createSeatRow(String seatType, int left, double price) {
+    private HBox createSeatRow(String seatType, int left, double price, TripSearch item) {
         HBox row = new HBox(10);
         row.getStyleClass().add("seat-type-row");
 
@@ -225,7 +224,13 @@ public class SearchController {
         if (left > 0) {
             Button bookBtn = new Button("Book Now");
             bookBtn.getStyleClass().add("book-button");
-            bookBtn.setOnAction(e -> handleBookTicket(seatType));
+            bookBtn.setOnAction(e -> {
+                try {
+                    handleBookTicket(e, seatType, price, item);
+                } catch (IOException | InterruptedException ex) {
+                    throw new RuntimeException(ex);
+                }
+            });
 
             row.getChildren().add(bookBtn);
         }
@@ -247,8 +252,68 @@ public class SearchController {
 
 
 
-    private void handleBookTicket(String seatType) {
-        // 订票逻辑的回调
+    private void handleBookTicket(ActionEvent event, String seatType, double price, TripSearch item) throws IOException, InterruptedException {
+        Booking booking = new Booking();
+        booking.setUserId(userId);
+        booking.setPathId(item.getPathId());
+        booking.setDepartureStationName(item.getStations().getFirst());
+        booking.setArrivalStationName(item.getStations().getLast());
+        booking.setDepartureTime(item.getArrivalTimeList().getFirst());
+        booking.setArrivalTime(item.getArrivalTimeList().getLast());
+        booking.setSeatLevel(seatType);
+        booking.setPrice(BigDecimal.valueOf(price));
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        String requestBody = objectMapper.writeValueAsString(booking);
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create("http://localhost:8088/api/booking"))
+                .header("Content-Type", "application/json")
+                .POST(HttpRequest.BodyPublishers.ofString(requestBody))
+                .build();
+
+        HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+
+        JsonNode responseJson = objectMapper.readTree(response.body());
+        String success = responseJson.get("Status").asText();
+
+        if ("Success".equals(success)) {
+            OrderController.OrderItem orderItem = new OrderController.OrderItem();
+            orderItem.setTicketId(responseJson.get("ticketId").asInt());
+            orderItem.setDepartStationName(item.getStations().getFirst());
+            orderItem.setArrivalStationName(item.getStations().getLast());
+            orderItem.setDepartureTime(item.getArrivalTimeList().getFirst());
+            orderItem.setArrivalTime(item.getArrivalTimeList().getLast());
+            orderItem.setSeatLevel(seatType);
+            orderItem.setPrice(price);
+            orderItem.setTrainName(item.getTrain_name());
+            orderItem.setInvoiceId(responseJson.get("invoiceId").asInt());
+            orderItem.setValidState(responseJson.get("validState").asText());
+            orderItem.setPaymentState(responseJson.get("paymentState").asText());
+
+
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("booksuccess.fxml"));
+            Scene scene = new Scene(loader.load(), Settings.get_x(), Settings.get_y());
+            BooksuccessController controller = loader.getController();
+            controller.setParameters(true, userId, username, orderItem, "Booking Successful! Redirecting to Payment Page...");
+
+            Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } else {
+            OrderController.OrderItem orderItem = new OrderController.OrderItem();
+            String message = "Booking failed. Error: " + success + "Redirecting to home...";
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("booksuccess.fxml"));
+            Scene scene = new Scene(loader.load(), Settings.get_x(), Settings.get_y());
+            BooksuccessController controller = loader.getController();
+            controller.setParameters(false, userId, username, orderItem, message);
+
+            Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        }
+
     }
 
     public static class TripSearch {
@@ -359,6 +424,81 @@ public class SearchController {
 
         public void setcSeatsLeft(int cSeatsLeft) {
             this.cSeatsLeft = cSeatsLeft;
+        }
+    }
+
+    public static class Booking {
+        private int userId;
+        private int pathId;
+        private String departureStationName;
+        private String arrivalStationName;
+        private String departureTime;
+        private String arrivalTime;
+        private String seatLevel;
+        private BigDecimal price;
+
+        public int getUserId() {
+            return userId;
+        }
+
+        public void setUserId(int userId) {
+            this.userId = userId;
+        }
+
+        public int getPathId() {
+            return pathId;
+        }
+
+        public void setPathId(int pathId) {
+            this.pathId = pathId;
+        }
+
+        public String getDepartureStationName() {
+            return departureStationName;
+        }
+
+        public void setDepartureStationName(String departureStationName) {
+            this.departureStationName = departureStationName;
+        }
+
+        public String getArrivalStationName() {
+            return arrivalStationName;
+        }
+
+        public void setArrivalStationName(String arrivalStationName) {
+            this.arrivalStationName = arrivalStationName;
+        }
+
+        public String getDepartureTime() {
+            return departureTime;
+        }
+
+        public void setDepartureTime(String departureTime) {
+            this.departureTime = departureTime;
+        }
+
+        public String getArrivalTime() {
+            return arrivalTime;
+        }
+
+        public void setArrivalTime(String arrivalTime) {
+            this.arrivalTime = arrivalTime;
+        }
+
+        public String getSeatLevel() {
+            return seatLevel;
+        }
+
+        public void setSeatLevel(String seatLevel) {
+            this.seatLevel = seatLevel;
+        }
+
+        public BigDecimal getPrice() {
+            return price;
+        }
+
+        public void setPrice(BigDecimal price) {
+            this.price = price;
         }
     }
 

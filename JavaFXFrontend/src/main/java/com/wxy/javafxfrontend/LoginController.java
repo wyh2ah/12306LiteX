@@ -126,7 +126,7 @@ public class LoginController {
             loginWarnText.setText("Register success! Please login.");
             switchToLogin();
         } else {
-            loginWarnText.setText("Register failed!");
+            registerWarnText.setText("Register failed! Try again.");
         }
     }
 
