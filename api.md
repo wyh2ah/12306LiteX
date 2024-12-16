@@ -350,16 +350,23 @@
 
 - 输入：
 
-  userID, pathID, departureStationName, arrivalStationName, departureTime, seatLevel
+  userID, pathID, departureStationName, arrivalStationName, departureTime, arrivalTime, seatLevel, price
 
   Example: 
 
-  ```
-  1, 1, New York, Orlando, 2024-12-23 11:00:00, A,
+  ```json
+  {
+    "userId": 1,
+    "pathId": 2,
+    "departureStationName": "Boston",
+    "arrivalStationName": "Portland",
+    "departureTime": "2024-12-23 17:00:00",
+    "arrivalTime": "2024-12-23 19:00:00",
+    "seatLevel": "A",
+    "price": 2333.5
+  }
   ```
 
-  
-  
   
 
 - 返回值：isSuccess
