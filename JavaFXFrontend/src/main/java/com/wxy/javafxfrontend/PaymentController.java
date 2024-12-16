@@ -82,7 +82,6 @@ public class PaymentController {
         this.username = username;
         this.orderItem = orderItem;
 
-        // 显示订单信息
         orderInfoHeader.setText("Order # " + orderItem.getInvoiceId() + " for " + username);
         departArrivalLabel.setText("Route: " + orderItem.getDepartStationName() + " → " + orderItem.getArrivalStationName());
         timeLabel.setText("Time: " + orderItem.getDepartureTime() + " - " + orderItem.getArrivalTime());

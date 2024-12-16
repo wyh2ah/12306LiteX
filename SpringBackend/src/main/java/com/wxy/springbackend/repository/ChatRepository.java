@@ -11,7 +11,11 @@ import org.springframework.stereotype.Service;
 import dev.langchain4j.data.message.ChatMessage;
 import org.springframework.transaction.annotation.Transactional;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import java.time.LocalDate;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Repository
 public class ChatRepository{
@@ -20,38 +24,71 @@ public class ChatRepository{
     public ChatRepository(ChatLanguageModel chatLanguageModel){
         this.chatLanguageModel = chatLanguageModel;
     }
-    String windowsList = "{Search, MyAccount, MyOrders, ShowTrains(From, To, Date)";
+    List<String> windowsList = List.of(
+            "Search",
+            "MyAccount",
+            "MyOrders",
+            "ShowTrains(From, To, Date)"
+    );
+    private static String getUsefulInfo(String userLocation) { // Trivial implementation of Function Call
+        LocalDate today = LocalDate.now();
+        String date = today.toString(); // Format: YYYY-MM-DD
 
+        return String.format("""
+Some useful knowledge you may need:
+- Today's date: %s
+- User's location: %s
+""", date, userLocation);
+    }
+    // Convert instructions to a string (e.g., [Search, MyAccount, MyOrders, ShowTrains(From, To, Date)])
+    String windowsListString = windowsList.toString();
 
-    String systemPrompt = String.format("""
-You are a train ticket subscription assistant. Your primary role is twofold:
+    // Define the descriptions as another list
+    List<String> instructionsDescription = List.of(
+            "\"Search\": Opens a search interface for looking up train tickets.",
+            "\"MyAccount\": Displays the user's personal information and allows changing passwords, usernames, or editing their profile.",
+            "\"MyOrders\": Shows the user's order history, including both unpaid and paid tickets.",
+            "\"ShowTrains(From, To, Date)\": Displays trains from the specified origin to the specified destination on the given date (YYYY-MM-DD)."
+    );
 
-1. If the user wants to use a specific feature (e.g., searching for trains, changing passwords), you must indicate a window to navigate to. The actual logic for the window transition will be handled by the frontend; you only need to send an instruction indicating which window should be opened. All possible windows are provided in a list: %s
+    // Join the descriptions into a readable string with line breaks
+    String instructionsDescriptionString = String.join("\n", instructionsDescription);
 
-   - "Search": This opens a search interface for looking up train tickets.
-   - "MyAccount": This page shows the user's personal information and allows changing passwords or usernames or Edit profile.
-   - "MyOrders": This page displays the user's order history, including unpaid and paid tickets.
-   - "ShowTrains(From, To, Date)": This page finds and displays trains from the origin to the destination on the specified date {YYYY-MM-DD},Noticed that you just need to give ShowTrains and put the parameter in the param.
+    String systemPrompt = """
+You are a train ticket subscription assistant. Your role has two main parts:
 
-2. If you think the user is simply engaging in casual conversation or asking general questions, respond in a witty and humorous manner without instructing any window change. Similarly, if you think the user's request does not correspond to any of the provided windows, please apologize that there is no such function.
+If the user wants to use a specific feature (e.g., searching for trains, changing passwords), you must indicate which window to navigate to. The frontend will handle the actual transition; you only need to provide the appropriate instruction. A list of all possible instructions is given below: %s
+
+Note: Some instructions may look like INS(a,b,c). In such cases, simply provide the instruction name, and then supply the parameters in the response fields. If only one or two parameters are known, set the others to "None".
+
+Here is the description of each instruction:
+%s
+
+If the user is simply engaging in casual conversation or asking general questions, respond with wit and humor without instructing a window change. If the user's request does not correspond to any of the provided instructions, please apologize and indicate that no such function exists.
+
+%s
 
 Response Format:
-Always reply in JSON format as follows:
+Always reply in JSON as follows, DO NOT provide any other words so that it will be failed to convert to JSON file:
 {
   "message": "Your witty or informative response here",
-  "Instruction": "The window name from the provided list or 'None' if just chatting",
-  "Param1": "The param1 of the instruction, like in "New York" in ShowTrainsFrom{}To{}at{YYYY-MM-DD}, if not, the value is None
-  "Param2": "The param2 of the instruction, like in "Miami" in ShowTrainsFrom{}To{}at{YYYY-MM-DD}, if not, the value is None
-  "Param3": "The param3 of the instruction, like in "2024-12-23" in ShowTrainsFrom{}To{}at{YYYY-MM-DD}, if not, the value is None
+  "Instruction": "The instruction name from the provided list or 'None' if just chatting",
+  "Param1": "The first parameter (e.g., 'New York' for ShowTrains). If not applicable, 'None'",
+  "Param2": "The second parameter (e.g., 'Miami' for ShowTrains). If not applicable, 'None'",
+  "Param3": "The third parameter (e.g., '2024-12-23' for ShowTrains). If not applicable, 'None'"
 }
 
 Now this is the user's request:
-""", windowsList);
+""";
     public Map<String, Object> getResponse(String message) {
         try {
-            String input = systemPrompt + message;
+            String userLocation = "New York"; // May get this param from the Frontend
+            String usefulInfo = getUsefulInfo(userLocation);
+            String basePrompt = String.format(systemPrompt, windowsListString, instructionsDescriptionString, usefulInfo);
+            String input = basePrompt + message;
+//            System.out.println(input);
             String llmOutput = chatLanguageModel.generate(input);
-
+//            System.out.println(llmOutput);
             // Parse the JSON string into a Map
             return objectMapper.readValue(llmOutput, new TypeReference<Map<String, Object>>() {});
         } catch (Exception e) {
