@@ -142,7 +142,6 @@ public class SearchController {
         String departTime = arrivalTimeList.getFirst();
         String arriveTime = arrivalTimeList.getLast();
         int stopCount = stations.size() - 2;
-
         Label headerLabel = new Label(depart + " → " + arrival + " on Train: " + item.getTrain_name());
         headerLabel.getStyleClass().add("ticket-header");
 
@@ -237,7 +236,7 @@ public class SearchController {
     @FXML
     private void handleBackButton(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("home.fxml"));
-        Scene scene = new Scene(loader.load(), 1920, 1080);
+        Scene scene = new Scene(loader.load(), Settings.get_x(), Settings.get_y());
         HomeController controller = loader.getController();
         controller.setParameters(userId, username);
 

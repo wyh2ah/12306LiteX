@@ -58,7 +58,7 @@ public class HomeController {
             return;
         }
         FXMLLoader loader = new FXMLLoader(getClass().getResource("search.fxml"));
-        Scene scene = new Scene(loader.load(), 1920, 1080);
+        Scene scene = new Scene(loader.load(), Settings.get_x(), Settings.get_y());
         SearchController controller = loader.getController();
         controller.setData(userId, username, departureField.getText(), arrivalField.getText(), departureDatePicker.getValue().toString());
 
@@ -78,7 +78,7 @@ public class HomeController {
     @FXML
     private void logout(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("login.fxml"));
-        Scene scene = new Scene(loader.load(), 1920, 1080);
+        Scene scene = new Scene(loader.load(), Settings.get_x(), Settings.get_y());
 
         Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
         stage.setScene(scene);
@@ -88,7 +88,7 @@ public class HomeController {
     @FXML
     private void accountClick(ActionEvent event) throws IOException, InterruptedException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("account.fxml"));
-        Scene scene = new Scene(loader.load(), 1920, 1080);
+        Scene scene = new Scene(loader.load(), Settings.get_x(), Settings.get_y());
         AccountController controller = loader.getController();
         controller.setParameters(this.userId, this.username);
 
@@ -100,7 +100,7 @@ public class HomeController {
     @FXML
     private void ordersClick(ActionEvent event) throws IOException, InterruptedException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("order.fxml"));
-        Scene scene = new Scene(loader.load(), 1920, 1080);
+        Scene scene = new Scene(loader.load(), Settings.get_x(), Settings.get_y());
         OrderController controller = loader.getController();
         controller.setParameters(this.userId, this.username);
 
@@ -112,7 +112,7 @@ public class HomeController {
     @FXML
     private void gptClick(ActionEvent event) throws IOException, InterruptedException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("gpt.fxml"));
-        Scene scene = new Scene(loader.load(), 1920, 1080);
+        Scene scene = new Scene(loader.load(), Settings.get_x(), Settings.get_y());
         GptController controller = loader.getController();
         controller.setInitialMessage(this.userId, this.username, gptField.getText());
 

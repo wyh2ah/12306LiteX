@@ -37,7 +37,7 @@ public class OrderController {
     @FXML
     private void handleBack(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("home.fxml"));
-        Scene scene = new Scene(loader.load(), 1920, 1080);
+        Scene scene = new Scene(loader.load(), Settings.get_x(), Settings.get_y());
         HomeController controller = loader.getController();
         controller.setParameters(userId, username);
 
@@ -158,7 +158,7 @@ public class OrderController {
 
         if ("cancel success".equals(response.body())) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("success.fxml"));
-            Scene scene = new Scene(loader.load(), 1920, 1080);
+            Scene scene = new Scene(loader.load(), Settings.get_x(), Settings.get_y());
             SuccessController controller = loader.getController();
             controller.setParameters(userId, username);
             controller.setSuccessLabel("Cancel Success! Please return to Home to proceed.");
@@ -168,7 +168,7 @@ public class OrderController {
             stage.show();
         } else if ("refund success".equals(response.body())) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("success.fxml"));
-            Scene scene = new Scene(loader.load(), 1920, 1080);
+            Scene scene = new Scene(loader.load(), Settings.get_x(), Settings.get_y());
             SuccessController controller = loader.getController();
             controller.setParameters(userId, username);
             controller.setSuccessLabel("Refund Success! Please return to Home to proceed.");
@@ -182,7 +182,7 @@ public class OrderController {
     private void handlePayNow(ActionEvent event, OrderItem order) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("payment.fxml"));
-            Scene scene = new Scene(loader.load(), 1920, 1080);
+            Scene scene = new Scene(loader.load(), Settings.get_x(), Settings.get_y());
             PaymentController controller = loader.getController();
             controller.setData(userId, username, order);
 

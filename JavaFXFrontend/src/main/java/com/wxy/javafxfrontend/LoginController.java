@@ -59,7 +59,7 @@ public class LoginController {
 
         if ("admin".equals(usernameField.getText()) && "admin".equals(passwordField.getText())) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("admin.fxml"));
-            Scene scene = new Scene(loader.load(), 1920, 1080);
+            Scene scene = new Scene(loader.load(), Settings.get_x(), Settings.get_y());
             Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
             stage.setScene(scene);
             stage.show();
@@ -87,7 +87,7 @@ public class LoginController {
                 loginWarnText.setText("Login Successful, welcome! Your User ID is: " + userId);
 
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("home.fxml"));
-                Scene scene = new Scene(loader.load(), 1920, 1080);
+                Scene scene = new Scene(loader.load(), Settings.get_x(), Settings.get_y());
                 HomeController controller = loader.getController();
                 controller.setParameters(userId, usernameField.getText());
 
