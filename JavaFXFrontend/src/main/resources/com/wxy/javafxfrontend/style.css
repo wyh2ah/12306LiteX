@@ -523,6 +523,42 @@ ScrollPane .viewport {
     -fx-min-height: 50;
 }
 
+.payment-panel {
+    -fx-background-color: #ffffff;
+    -fx-padding: 30;
+    -fx-spacing: 20;
+    -fx-border-color: #dddddd;
+    -fx-border-width: 1;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-effect: dropshadow(one-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 2);
+}
+
+.payment-method-option {
+    -fx-font-family: 'Libre Baskerville';
+    -fx-font-size: 14px;
+    -fx-text-fill: #333;
+    -fx-cursor: hand;
+}
+
+.payment-method-option:selected {
+    -fx-text-fill: #000000;
+    -fx-font-weight: bold;
+}
+
+.success-panel {
+    -fx-background-color: #ffffff;
+    -fx-padding: 30;
+    -fx-spacing: 20;
+    -fx-border-color: #dddddd;
+    -fx-border-width: 1;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-effect: dropshadow(one-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 2);
+
+    -fx-max-height: 400;
+    -fx-max-width: 1000;
+}
 
 
 

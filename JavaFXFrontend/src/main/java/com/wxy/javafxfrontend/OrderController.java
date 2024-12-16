@@ -101,18 +101,18 @@ public class OrderController {
         Label priceLabel = new Label("Price: $" + order.getPrice());
         priceLabel.getStyleClass().add("order-price-label");
 
-        Label paymentStateLabel = new Label("Payment State: " + (order.getPaymentState().equals("True") ? "Paid" : "Not Paid"));
+        Label paymentStateLabel = new Label("Payment State: " + (order.getPaymentState().equals("true") ? "Paid" : "Not Paid"));
         paymentStateLabel.getStyleClass().add("order-info-label");
 
         orderBox.getChildren().addAll(headerLabel, departureLabel, arrivalLabel, seatLabel, priceLabel, paymentStateLabel);
 
-        if (!"True".equals(order.getPaymentState())) {
+        if (!"true".equals(order.getPaymentState())) {
             HBox buttonContainer = new HBox();
             buttonContainer.setSpacing(10);
 
             Button payNowButton = new Button("Pay Now");
             payNowButton.getStyleClass().add("pay-now-button");
-            payNowButton.setOnAction(e -> handlePayNow(order));
+            payNowButton.setOnAction(event -> handlePayNow(event, order));
 
             buttonContainer.getChildren().add(payNowButton);
             orderBox.getChildren().add(buttonContainer);
@@ -121,12 +121,19 @@ public class OrderController {
         return orderBox;
     }
 
-    private void handlePayNow(OrderItem order) {
-        // 实现支付逻辑
-        // 调用接口完成支付操作，然后更新界面
-        System.out.println("Pay now for ticketId: " + order.getTicketId());
-        // 支付成功后可重新加载订单列表
-        loadOrders();
+    private void handlePayNow(ActionEvent event, OrderItem order) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("payment.fxml"));
+            Scene scene = new Scene(loader.load(), 1920, 1080);
+            PaymentController controller = loader.getController();
+            controller.setData(userId, username, order);
+
+            Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     // 根据示例返回信息创建OrderItem类以接收数据
