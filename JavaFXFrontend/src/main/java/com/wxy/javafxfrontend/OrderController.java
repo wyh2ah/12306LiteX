@@ -102,16 +102,16 @@ public class OrderController {
         priceLabel.getStyleClass().add("order-price-label");
 
         Label paymentStateLabel = new Label("Payment State: " + (order.getPaymentState().equals("true") ? "Paid" : "Not Paid"));
-        paymentStateLabel.getStyleClass().add("order-info-label");
+        paymentStateLabel.getStyleClass().add("order-price-label");
 
         Label statusLabel = new Label("Status: " + order.getValidState());
-        priceLabel.getStyleClass().add("order-price-label");
+        statusLabel.getStyleClass().add("order-price-label");
 
         orderBox.getChildren().addAll(headerLabel, departureLabel, arrivalLabel, seatLabel, priceLabel, paymentStateLabel, statusLabel);
 
         HBox buttonContainer = new HBox();
         boolean isPaid = false;
-        if (!"true".equals(order.getPaymentState())) {
+        if (!"true".equals(order.getPaymentState()) && "pending".equals(order.getValidState())) {
             isPaid = true;
             buttonContainer.setSpacing(10);
 
@@ -123,7 +123,7 @@ public class OrderController {
             orderBox.getChildren().add(buttonContainer);
         }
 
-        if (!"refund".equals(order.getValidState())) {
+        if (!"refund".equals(order.getValidState()) && !"cancelled".equals(order.getValidState())) {
             buttonContainer.setSpacing(10);
 
             Button cancelButton = new Button("Cancel/Refund");
