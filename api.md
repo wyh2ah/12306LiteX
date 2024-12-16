@@ -567,3 +567,14 @@ public class TicketService {
 
 ```
 
+
+
+### Application.properties (OpenAI)
+
+```
+langchain4j.open-ai.chat-model.api-key=${OPENAI_KEY}
+langchain4j.open-ai.chat-model.model-name=gpt-4o-mini
+langchain4j.open-ai.chat-model.log-requests=true
+langchain4j.open-ai.chat-model.log-responses=true
+```
+
