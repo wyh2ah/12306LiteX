@@ -92,7 +92,7 @@ public class GptController {
         try {
             String requestBody = "{\"message\":\"" + userMessage.replace("\"", "\\\"") + "\"}";
             HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create("http://localhost:8088/api/gpt"))
+                    .uri(URI.create("http://localhost:8088/api/chat"))
                     .header("Content-Type", "application/json")
                     .POST(HttpRequest.BodyPublishers.ofString(requestBody))
                     .build();
@@ -111,6 +111,7 @@ public class GptController {
     }
 
     private String parseGptResponse(String jsonResponse) {
+
         // 简单解析字符串中的response字段
         // 实际应使用JSON解析库
         // 假设返回格式: {"response":"GPT的回答..."}
