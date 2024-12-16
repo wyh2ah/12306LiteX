@@ -590,3 +590,19 @@ langchain4j.open-ai.chat-model.log-requests=true
 langchain4j.open-ai.chat-model.log-responses=true
 ```
 
+
+
+### Chat request
+
+
+
+```json
+{
+    "message": "Ah, the classic quest for tickets! Miami to New York, a journey of sun to skyscrapers! Let's see if we can find you a train for that date.",
+    "Instruction": "ShowTrainsFrom{}To{}at{YYYY-MM-DD}",
+    "Param1": "Miami",
+    "Param2": "New York",
+    "Param3": "2024-12-21"
+}
+```
+
