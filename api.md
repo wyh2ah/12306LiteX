@@ -374,12 +374,10 @@
   ```json
   {
       "Status": "Success",
-      "Information": {
-          "validState": "pending",
-          "invoiceId": 11,
-          "paymentState": "false",
-          "ticketId": 11
-      }
+      "validState": "pending",
+      "invoiceId": 12,
+      "paymentState": "false",
+      "ticketId": 12
   }
   ```
 

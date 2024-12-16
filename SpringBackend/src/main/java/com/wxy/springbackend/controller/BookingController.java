@@ -25,19 +25,18 @@ public class BookingController {
         Map<String, Object> response = new HashMap<>();
         try {
             BookingResponse bookingResponse = bookingService.bookTicket(booking);
-
-            Map<String, Object> infoMap = new HashMap<>();
-            infoMap.put("invoiceId", bookingResponse.getInvoiceId());
-            infoMap.put("ticketId", bookingResponse.getTicketId());
-            infoMap.put("validState", bookingResponse.getValidState());
-            infoMap.put("paymentState", bookingResponse.getPaymentState());
-
-            response.put("Information", infoMap);
+            response.put("invoiceId", bookingResponse.getInvoiceId());
+            response.put("ticketId", bookingResponse.getTicketId());
+            response.put("validState", bookingResponse.getValidState());
+            response.put("paymentState", bookingResponse.getPaymentState());
             response.put("Status", "Success");
 
             return response;
         } catch (Exception e) {
-            response.put("Information", null);  // or omit if you prefer
+            response.put("invoiceId", null);
+            response.put("ticketId", null);
+            response.put("validState", null);
+            response.put("paymentState",null);
             response.put("Status", e.getMessage());
             return response;
         }
