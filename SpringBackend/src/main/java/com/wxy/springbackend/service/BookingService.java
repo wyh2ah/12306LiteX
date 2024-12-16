@@ -31,6 +31,7 @@ public class BookingService {
         String seatLevel = booking.getSeatLevel();
         BigDecimal price = booking.getPrice();
         // Fetch the stations in range
+        // Get all remain tickets (query)
         List<Map<String, Object>> stationsInRange = bookingRepository.getPathStationsForRange(
                 pathId, departureStationName, arrivalStationName, departureTime, arrivalTime
         );
@@ -58,6 +59,7 @@ public class BookingService {
         }
 
         // Decrement seats for the entire range
+        // Modify
         bookingRepository.decrementSeatsForRange(stationsInRange, pathId, seatLevel);
 
         int departStationId = (int) stationsInRange.get(0).get("station_id");

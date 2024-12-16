@@ -14,7 +14,7 @@ public class ChatController {
         this.chatService = chatService;
     }
     @PostMapping("/chat")
-    public String model(@RequestParam String body) {
-        return chatService.getResponse(body);
+    public Map<String, Object> model(@RequestParam String message) {
+        return chatService.getResponse(message);
     }
 }

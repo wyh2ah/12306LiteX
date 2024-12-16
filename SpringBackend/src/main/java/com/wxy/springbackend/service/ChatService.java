@@ -21,8 +21,7 @@ public class ChatService {
         this.chatRepository = chatRepository;
     }
 
-    public String getResponse(String message) {
-
+    public Map<String, Object> getResponse(String message) {
         return chatRepository.getResponse(message);
     }
 }
