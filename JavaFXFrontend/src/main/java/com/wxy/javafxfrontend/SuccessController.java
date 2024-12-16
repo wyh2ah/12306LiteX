@@ -30,7 +30,7 @@ public class SuccessController {
     private void backToHome(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("home.fxml"));
-            Scene scene = new Scene(loader.load(), 1920, 1080);
+            Scene scene = new Scene(loader.load(), Settings.get_x(), Settings.get_y());
             HomeController controller = loader.getController();
             controller.setParameters(userId, username);
 

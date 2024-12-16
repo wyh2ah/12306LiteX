@@ -11,7 +11,7 @@ public class JavaFXApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(JavaFXApplication.class.getResource("login.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 1920, 1080);
+        Scene scene = new Scene(fxmlLoader.load(), Settings.get_x(), Settings.get_y());
         stage.setTitle("12306LiteX");
         stage.setScene(scene);
         stage.show();

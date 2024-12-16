@@ -43,7 +43,7 @@ public class AdminController {
     @FXML
     private void handleLogout(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("login.fxml"));
-        Scene scene = new Scene(loader.load(), 1920, 1080);
+        Scene scene = new Scene(loader.load(), Settings.get_x(), Settings.get_y());
         Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
         stage.setScene(scene);
         stage.show();

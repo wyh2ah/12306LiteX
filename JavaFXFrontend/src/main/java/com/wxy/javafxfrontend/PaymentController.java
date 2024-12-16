@@ -95,7 +95,7 @@ public class PaymentController {
     private void handleBack() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("order.fxml"));
-            Scene scene = new Scene(loader.load(), 1920, 1080);
+            Scene scene = new Scene(loader.load(), Settings.get_x(), Settings.get_y());
             OrderController controller = loader.getController();
             controller.setParameters(userId, username);
 
@@ -154,7 +154,7 @@ public class PaymentController {
 
             if (response.body().equals("payment success!")) {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("success.fxml"));
-                Scene scene = new Scene(loader.load(), 1920, 1080);
+                Scene scene = new Scene(loader.load(), Settings.get_x(), Settings.get_y());
                 SuccessController controller = loader.getController();
                 controller.setParameters(userId, username);
 
