@@ -5,10 +5,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static java.lang.Math.min;
 
@@ -21,6 +18,7 @@ public class TripSearchRepository {
     }
 
     public List<TripSearch> findAll(String depart_station, String arrival_station, String datetime){
+
         String sql = """
                 with DepartStation AS(
                     SELECT

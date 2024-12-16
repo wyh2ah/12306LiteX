@@ -1,21 +1,21 @@
 use javaproject;
 
 INSERT INTO wxy_station (station_id, station_name) VALUES
-    (1, "Portland"),
-    (2, "Boston"),
-    (3, "New York"),
-    (4, "Baltimore"),
-    (5, "Richmond"),
-    (6, "Orlando"),
-    (7, "Miami"),
-    (8, "Pittsburgh"),
-    (9, "Ann Arbor"),
-    (10, "Detroit"),
-    (11, "Chicago"),
-    (12, "Washington DC"),
-    (13, "Atlanta"),
-    (14, "Nashville"),
-    (15, "New Orleans");
+    (1, "portland"),
+    (2, "boston"),
+    (3, "new york"),
+    (4, "baltimore"),
+    (5, "richmond"),
+    (6, "orlando"),
+    (7, "miami"),
+    (8, "pittsburgh"),
+    (9, "ann arbor"),
+    (10, "detroit"),
+    (11, "chicago"),
+    (12, "washington dc"),
+    (13, "atlanta"),
+    (14, "nashville"),
+    (15, "new orleans");
 
 
 INSERT INTO WXY_TRAIN (TRAIN_ID, TRAIN_NAME, A_SEATS_NUM, B_SEATS_NUM, c_seats_num) VALUES
