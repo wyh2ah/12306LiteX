@@ -1,5 +1,6 @@
 package com.wxy.springbackend.service;
 
+import com.wxy.springbackend.model.BookingResponse;
 import com.wxy.springbackend.repository.BookingRepository;
 import com.wxy.springbackend.model.Booking;
 import org.springframework.stereotype.Service;
@@ -20,7 +21,7 @@ public class BookingService {
     }
 
     @Transactional
-    public boolean bookTicket(Booking booking) {
+    public BookingResponse bookTicket(Booking booking) {
         int userId = booking.getUserId();
         int pathId = booking.getPathId();
         String departureStationName = booking.getDepartureStationName();
@@ -80,6 +81,6 @@ public class BookingService {
         int invoiceId = bookingRepository.createInvoice(ticketId);
 
         // If no exception thrown until here, operation succeeded
-        return true;
+        return new BookingResponse(invoiceId, ticketId);
     }
 }

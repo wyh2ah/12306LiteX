@@ -1,6 +1,7 @@
 package com.wxy.springbackend.controller;
 
 import com.wxy.springbackend.model.Booking;
+import com.wxy.springbackend.model.BookingResponse;
 import com.wxy.springbackend.service.BookingService;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,13 +24,21 @@ public class BookingController {
     public Map<String, Object> bookTicket(@RequestBody Booking booking) {
         Map<String, Object> response = new HashMap<>();
         try {
-            boolean success = bookingService.bookTicket(booking);
-            response.put("success", success);
-            response.put("error", "None");
+            BookingResponse bookingResponse = bookingService.bookTicket(booking);
+
+            Map<String, Object> infoMap = new HashMap<>();
+            infoMap.put("invoiceId", bookingResponse.getInvoiceId());
+            infoMap.put("ticketId", bookingResponse.getTicketId());
+            infoMap.put("validState", bookingResponse.getValidState());
+            infoMap.put("paymentState", bookingResponse.getPaymentState());
+
+            response.put("Information", infoMap);
+            response.put("Status", "Success");
+
             return response;
         } catch (Exception e) {
-            response.put("success", false);
-            response.put("error", e.getMessage());
+            response.put("Information", null);  // or omit if you prefer
+            response.put("Status", e.getMessage());
             return response;
         }
     }

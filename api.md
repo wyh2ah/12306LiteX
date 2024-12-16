@@ -369,7 +369,21 @@
 
   
 
-- 返回值：isSuccess
+- 返回值：
+
+  ```json
+  {
+      "Status": "Success",
+      "Information": {
+          "validState": "pending",
+          "invoiceId": 11,
+          "paymentState": "false",
+          "ticketId": 11
+      }
+  }
+  ```
+
+  
 
 
 
