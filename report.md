@@ -10,6 +10,8 @@
 
 <h5><center>Weizhen Zhou, NetID: wz3008</center></h5>
 
+## [Our Github Reposiitory Link](https://github.com/wyh2ah/12306LiteX)
+
 ### Overview
 
 - 12306 is the official online ticket booking platform for China’s railway system, operated by China Railway Corporation. It's one of the most widely used systems in China, serving millions of users daily, especially during peak travel seasons like the Chinese New Year, where demand for tickets skyrockets. The platform enables users to book tickets, check train schedules, manage reservations, and handle refunds.
@@ -30,10 +32,10 @@
 ### Features
 
 - GUI (JavaFX)
-- [Not Java threads]Threads (SpringBoot Tomcat & Hikari)
+- [Not Java threads] Threads (SpringBoot Tomcat & Hikari)
 - Database (MySQL)
 - SpringBoot Framework
-- Java RESTful APIs and Web Service (HTTP request)
+- Java RESTful style APIs and Web Service (HTTP request)
 - JDBC
 -  Sychronization ReentrantLock (Atomic book operation)
 -  Security (AES Password Encryption)
@@ -45,6 +47,8 @@
 - Run your MySQL server, note its port and location
 
 - Config `src/main/resources/application.properties`
+
+  The  current `tomcat` and `hikari` config works well on `Intel Core i9-14900HX`
 
   ```
   spring.application.name=SpringBackend
@@ -73,8 +77,11 @@
   ```
 
 - Make sure IDEA recognize and load `Maven` correctly.
+- If you want to change resolution, config `src/main/java/com/wxy/javafxfrontend/Settings.java`, and change `res_width` and `res_height`. (Current `1920*1080` works on `3840*2160` screen)
 - Run `src/main/java/com/wxy/springbackend/SpringBackendApplication.java`
 - Run `src/main/java/com/wxy/javafxfrontend/JavaFXApplication.java`
+
+- NOTICE: There may be latency in OpenAI APIs response.
 
 ### Basic Function
 
@@ -128,7 +135,11 @@ We use oracle to design database schema, and MySQL for DDL and DML code.
 
 ### Frontend
 
+![](.\images\frontend.png)
 
+We use JavaFX as our frontend instead of Java Swing because its modern feature and compatiblity with CSS. Each `.fxml` coordinates with a Controller. `Settings.java` is used to adjust resolution. Frontend has same static DTO class and use `ObjectMapper` to map received response to a class object. Frontend use `HttpClient` to send and receive HTTP requests.
+
+We use a overall `style.css` to render display items. 
 
 ### AI Interface
 
@@ -136,3 +147,16 @@ We use oracle to design database schema, and MySQL for DDL and DML code.
 
 ### GUI Preview
 
+![](.\images\1.png)
+![](.\images\2.png)
+![](.\images\3.png)
+![](.\images\4.png)
+![](.\images\5.png)
+![](.\images\6.png)
+![](.\images\7.png)
+![](.\images\8.png)
+![](.\images\9.png)
+![](.\images\10.png)
+![](.\images\my_orders.png)
+![](.\images\11.png)
+![](.\images\12.png)
