@@ -88,6 +88,9 @@ public class GptController {
     }
 
     private void addGptHyperLink(String instruction, String param1, String param2, String param3) {
+        if (instruction == "None"){
+            return;
+        }
         HBox messageBox = new HBox();
         messageBox.getStyleClass().add("message-box-gpt");
 
