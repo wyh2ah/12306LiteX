@@ -74,7 +74,7 @@
   spring.datasource.hikari.connection-timeout=20000
   spring.datasource.hikari.minimum-idle=10
   
-  langchain4j.open-ai.chat-model.api-key=//replace with OpenAI token
+  langchain4j.open-ai.chat-model.api-key=${OPENAI_KEY}//replace with OpenAI token
   langchain4j.open-ai.chat-model.model-name=gpt-4o-mini
   langchain4j.open-ai.chat-model.log-requests=true
   langchain4j.open-ai.chat-model.log-responses=true
@@ -146,6 +146,40 @@ We use JavaFX as our frontend instead of Java Swing because its modern feature a
 We use a overall `style.css` to render display items. 
 
 ### AI Interface
+
+##### Prompt Engineering
+
+We employ LangChain for Java as the foundational framework to interface with LLMs. Our approach leverages prompt tuning to ensure the model consistently understands its role as a train ticket subscription assistant, and adheres to specified behavioral guidelines. 
+
+##### Structured Response 
+
+The model’s responses must follow a strict JSON format to machine-readable outputs. For example, the model might produce:
+
+```json
+{
+    "message": "Ah, Florida sounds tempting! But tonight might be a bit of a stretch unless you have a magic carpet. Let's check the trains first!",
+    "Instruction": "ShowTrains",
+    "Param1": "New York",
+    "Param2": "Florida",
+    "Param3": "2024-12-16"
+}
+```
+
+**- message**: A user-facing message displayed in the frontend UI.
+
+**- Instruction & Params**: The chosen action (e.g., `ShowTrains`) and up to three parameters needed to execute that action.
+
+Any guildence or casual conversation appears exclusively in the `message` field, while operational instructions remain separated and easily parsed by the application that the frontend can excute the redirection logic based on these.
+
+##### Function Calling
+
+We integrate a function calling layer to enrich the model’s responses with dynamic, real-time data. For example, we may have a function `getCurrentLocation()` or `getCurrentDate()` that the model can produce more grounded replies and tailor its instructions dynamically based on real-time data..
+
+##### Rollback Mechanism
+
+If the model’s response is invalid, incomplete, or does not follow the specified structure, we implement a rollback mechanism. The last user message and any relevant context are resent to the model, prompting it to regenerate its response according to the strict output format.
+
+
 
 
 
