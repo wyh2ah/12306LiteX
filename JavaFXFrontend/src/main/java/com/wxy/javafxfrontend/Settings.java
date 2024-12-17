@@ -1,8 +1,8 @@
 package com.wxy.javafxfrontend;
 
 public class Settings {
-    private static int res_width = 1600;
-    private static int res_height = 900;
+    private static int res_width = 1920;
+    private static int res_height = 1080;
 
     public static int get_x() {
         return res_width;

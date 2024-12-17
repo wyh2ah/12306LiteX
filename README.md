@@ -50,7 +50,7 @@
 
 - First run `database/MySQL_DDL.sql` , then run `database/mysql_dml.sql`
 
-- Config `src/main/resources/application.properties`
+- Config `SpringBackend/src/main/resources/application.properties`
 
   The  current `tomcat` and `hikari` config works well on `Intel Core i9-14900HX`
 
@@ -81,9 +81,9 @@
   ```
 
 - Make sure IDEA recognize and load `Maven` correctly.
-- If you want to change resolution, config `src/main/java/com/wxy/javafxfrontend/Settings.java`, and change `res_width` and `res_height`. (Current `1920*1080` works on `3840*2160` screen)
-- Run `src/main/java/com/wxy/springbackend/SpringBackendApplication.java`
-- Run `src/main/java/com/wxy/javafxfrontend/JavaFXApplication.java`
+- If you want to change resolution, config `JavaFXFrontend/src/main/java/com/wxy/javafxfrontend/Settings.java`, and change `res_width` and `res_height`. (Current `1920*1080` works on `3840*2160` screen)
+- Run `SpringBackend/src/main/java/com/wxy/springbackend/SpringBackendApplication.java`
+- Run `JavaFXFrontend/src/main/java/com/wxy/javafxfrontend/JavaFXApplication.java`
 
 - NOTICE: There may be latency in OpenAI APIs response.
 
