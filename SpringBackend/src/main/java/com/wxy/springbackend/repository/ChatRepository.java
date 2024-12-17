@@ -29,7 +29,7 @@ public class ChatRepository{
                 "Search: Opens a search interface for looking up train tickets.",
                 "MyAccount: Displays the user's personal information and allows changing passwords, usernames, or editing their profile.",
                 "MyOrders: Shows the user's order history, including both unpaid and paid tickets.",
-                "ShowTrains: Three param (From, To, Date), not None. Displays trains from the specified origin to the specified destination on the given date (YYYY-MM-DD). If you are not sure all three params are. Just ask the user"
+                "ShowTrains: Three param (From, To, Date), all of these cannot be None. Displays trains from the specified origin to the specified destination on the given date (YYYY-MM-DD). If you are not sure all three params are. Just ask the user"
         );
         this.chatLanguageModel = chatLanguageModel;
     }
@@ -48,51 +48,61 @@ public class ChatRepository{
         for (int attempt = 1; attempt <= maxAttempts; attempt++) {
             try {
                 String llmOutput = chatLanguageModel.generate(inputMessage);
-
-                // Attempt to parse the JSON string into a Map
+                System.out.println(inputMessage);
+                System.out.println(llmOutput);
                 Map<String, Object> responseMap = objectMapper.readValue(llmOutput, new TypeReference<Map<String, Object>>() {});
 
                 // Validate Instruction field
-                Object instructionObj = responseMap.get("Instruction");
-                if (!(instructionObj instanceof String)) {
-                    // Instruction is missing or not a string
-                    throw new IllegalArgumentException("Instruction field missing or invalid.");
-                }
-
-                String instruction = (String) instructionObj;
-                // Check if instruction is in the windows list or is "None"
-                boolean validInstruction = "None".equalsIgnoreCase(instruction) ||
-                        windowsList.contains(instruction);
+                String instruction = getStringField(responseMap, "Instruction", true);
+                // Check if instruction is in the windows list or "None"
+                boolean validInstruction = "None".equalsIgnoreCase(instruction) || windowsList.contains(instruction);
 
                 if (!validInstruction) {
-                    // Instruction is out of range
                     if (attempt < maxAttempts) {
-                        inputMessage = basePrompt + message + llmOutput +
-                                "\nYour provided Instruction is not one of the allowed values: " + windowsListString +
+                        inputMessage = basePrompt + message + "\n" +
+                                "\nYour previous provided Instruction is not one of the allowed values: " + windowsListString +
                                 ". Please revise your response to follow the given format and use a valid Instruction.";
-                        continue; // retry
+                        continue;
                     } else {
-                        // Out of attempts
                         return defaultFallbackResponse();
                     }
                 }
 
-                // If we reach here, we have valid JSON and a valid instruction
+                // Validate parameters
+                String param1 = getStringField(responseMap, "Param1", true);
+                String param2 = getStringField(responseMap, "Param2", true);
+                String param3 = getStringField(responseMap, "Param3", true);
+
+                boolean validParams = validateParams(instruction, param1, param2, param3);
+
+                if (!validParams) {
+                    if (attempt < maxAttempts) {
+                        inputMessage = basePrompt + message + "\n" +
+                                "\nYour previous parameters are invalid for the given Instruction. " +
+                                "Please ensure that if the Instruction is 'Search', 'MyAccount', or 'MyOrders', all parameters (Param1, Param2, Param3) must be 'None'. " +
+                                "If the Instruction is 'ShowTrains(From, To, Date)', then all three parameters must be non-'None', and the third must be in YYYY-MM-DD format." +
+                                "If the user doesn't have enough information for you to give an instruction, set it all to None and only respond to the user";
+                        continue;
+                    } else {
+                        return defaultFallbackResponse();
+                    }
+                }
+
+                // If we reach here, all validations have passed
                 return responseMap;
 
             } catch (Exception e) {
+                // JSON parsing or field retrieval error
                 if (attempt < maxAttempts) {
                     inputMessage = basePrompt + message +
                             "\nYour previous response was not in the correct JSON format or had invalid fields. " +
                             "Please strictly follow the JSON response format described above.";
                 } else {
-                    // After max attempts, return a default fallback
                     return defaultFallbackResponse();
                 }
             }
         }
 
-        // If somehow we exit the loop (which we shouldn't), return fallback
         return defaultFallbackResponse();
     }
 
@@ -104,6 +114,55 @@ public class ChatRepository{
                 "Param2", "None",
                 "Param3", "None"
         );
+    }
+
+    private String getStringField(Map<String, Object> map, String fieldName, boolean required) {
+        Object val = map.get(fieldName);
+        if (required && (!(val instanceof String))) {
+            throw new IllegalArgumentException(fieldName + " field missing or invalid.");
+        }
+        return val == null ? null : (String) val;
+    }
+
+    private boolean validateParams(String instruction, String param1, String param2, String param3) {
+        // Instructions that must have all params as None:
+        List<String> noParamInstructions = List.of("Search", "MyAccount", "MyOrders");
+        // Instruction that must have all three params non-None and a valid date:
+        String showTrainsInstruction = "ShowTrains";
+
+        if (noParamInstructions.contains(instruction)) {
+            // All parameters should be "None"
+            return "None".equalsIgnoreCase(param1) &&
+                    "None".equalsIgnoreCase(param2) &&
+                    "None".equalsIgnoreCase(param3);
+        }
+
+        if (showTrainsInstruction.equals(instruction)) {
+            // All three parameters must be non-None
+            if ("None".equalsIgnoreCase(param1) || "None".equalsIgnoreCase(param2) || "None".equalsIgnoreCase(param3)) {
+                return false;
+            }
+            // Validate date format (YYYY-MM-DD) for param3
+            return isValidDate(param3);
+        }
+
+        if ("None".equalsIgnoreCase(instruction)) {
+            return "None".equalsIgnoreCase(param1) &&
+                    "None".equalsIgnoreCase(param2) &&
+                    "None".equalsIgnoreCase(param3);
+        }
+
+        return false;
+    }
+
+    private boolean isValidDate(String dateStr) {
+        // Basic validation for YYYY-MM-DD
+        try {
+            java.time.LocalDate.parse(dateStr);
+            return true;
+        } catch (java.time.format.DateTimeParseException e) {
+            return false;
+        }
     }
 
     private static String getUsefulInfo(String userLocation) { // Trivial implementation of Function Call
