@@ -18,6 +18,7 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.Objects;
 
 
 public class GptController {
@@ -88,7 +89,7 @@ public class GptController {
     }
 
     private void addGptHyperLink(String instruction, String param1, String param2, String param3) {
-        if (instruction == "None"){
+        if (Objects.equals(instruction, "None")){
             return;
         }
         HBox messageBox = new HBox();
