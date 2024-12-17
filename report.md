@@ -46,6 +46,10 @@
 
 - Run your MySQL server, note its port and location
 
+- Run `create database javaproject` in MySQL console
+
+- First run `database/MySQL_DDL.sql` , then run `database/mysql_dml.sql`
+
 - Config `src/main/resources/application.properties`
 
   The  current `tomcat` and `hikari` config works well on `Intel Core i9-14900HX`
